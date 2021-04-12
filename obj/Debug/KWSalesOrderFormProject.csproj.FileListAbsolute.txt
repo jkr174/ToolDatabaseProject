@@ -1,0 +1,15 @@
+C:\Users\romo1\source\repos\KWSalesOrderFormProject\obj\Debug\KWSalesOrderFormProject.csprojAssemblyReference.cache
+C:\Users\romo1\source\repos\KWSalesOrderFormProject\obj\Debug\KWSalesOrderFormProject.frmKWSales.resources
+C:\Users\romo1\source\repos\KWSalesOrderFormProject\obj\Debug\KWSalesOrderFormProject.Properties.Resources.resources
+C:\Users\romo1\source\repos\KWSalesOrderFormProject\obj\Debug\KWSalesOrderFormProject.csproj.GenerateResource.cache
+C:\Users\romo1\source\repos\KWSalesOrderFormProject\obj\Debug\KWSalesOrderFormProject.csproj.CoreCompileInputs.cache
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\bin\Debug\KWSalesOrderFormProject.exe.config
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\bin\Debug\KWSalesOrderFormProject.exe
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\bin\Debug\KWSalesOrderFormProject.pdb
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\obj\Debug\KWSalesOrderFormProject.csprojAssemblyReference.cache
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\obj\Debug\KWSalesOrderFormProject.Properties.Resources.resources
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\obj\Debug\KWSalesOrderFormProject.csproj.GenerateResource.cache
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\obj\Debug\KWSalesOrderFormProject.csproj.CoreCompileInputs.cache
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\obj\Debug\KWSalesOrderFormProject.exe
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\obj\Debug\KWSalesOrderFormProject.pdb
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\Chapter9-2\obj\Debug\KWSalesOrderFormProject.grpProducts.resources

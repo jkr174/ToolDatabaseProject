@@ -1,0 +1,10 @@
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.exe.config
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.exe
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.pdb
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\RentedForm.csprojAssemblyReference.cache
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.frmRented.resources
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.Properties.Resources.resources
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\RentedForm.csproj.GenerateResource.cache
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\RentedForm.csproj.CoreCompileInputs.cache
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.exe
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.pdb
