@@ -8,3 +8,16 @@ C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\RentedForm.c
 C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\RentedForm.csproj.CoreCompileInputs.cache
 C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.exe
 C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.pdb
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\KWSalesOrderFormProject.exe.config
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\KWSalesOrderFormProject.exe
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\KWSalesOrderFormProject.pdb
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\RentedForm.csprojAssemblyReference.cache
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\KWSalesOrderFormProject.frmRented.resources
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\KWSalesOrderFormProject.Properties.Resources.resources
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\RentedForm.csproj.GenerateResource.cache
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\RentedForm.csproj.CoreCompileInputs.cache
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\KWSalesOrderFormProject.exe
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\KWSalesOrderFormProject.pdb
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\ToolRentalsDB.mdf
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\ToolRentalsDB_log.ldf
+C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\KWSalesOrderFormProject.frmInventory.resources
