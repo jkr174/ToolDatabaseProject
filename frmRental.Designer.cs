@@ -51,10 +51,25 @@ namespace KWSalesOrderFormProject
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnAuthors = new System.Windows.Forms.Button();
-            this.btnPublishers = new System.Windows.Forms.Button();
+            this.btnRepairs = new System.Windows.Forms.Button();
+            this.btnInventory = new System.Windows.Forms.Button();
             this.printPreview = new System.Windows.Forms.PrintPreviewDialog();
             this.picTools = new System.Windows.Forms.PictureBox();
+            this.lblCustID = new System.Windows.Forms.Label();
+            this.lblItemID = new System.Windows.Forms.Label();
+            this.lblSKUNumber = new System.Windows.Forms.Label();
+            this.lblProductName = new System.Windows.Forms.Label();
+            this.txtCustID = new System.Windows.Forms.TextBox();
+            this.txtItemID = new System.Windows.Forms.TextBox();
+            this.txtSKUNumber = new System.Windows.Forms.TextBox();
+            this.txtProductName = new System.Windows.Forms.TextBox();
+            this.btnAddCust = new System.Windows.Forms.Button();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.lblPhone = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.toolRentalsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentedItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdRentals)).BeginInit();
@@ -78,7 +93,6 @@ namespace KWSalesOrderFormProject
             // 
             // btnPrint
             // 
-            this.btnPrint.Enabled = false;
             this.btnPrint.Location = new System.Drawing.Point(353, 524);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
@@ -131,10 +145,11 @@ namespace KWSalesOrderFormProject
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 65);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 36;
             this.pictureBox1.TabStop = false;
             // 
@@ -148,6 +163,7 @@ namespace KWSalesOrderFormProject
             this.btnFirst.TabStop = false;
             this.btnFirst.Text = "|< First";
             this.btnFirst.UseVisualStyleBackColor = true;
+            this.btnFirst.Visible = false;
             // 
             // btnLast
             // 
@@ -159,6 +175,7 @@ namespace KWSalesOrderFormProject
             this.btnLast.TabStop = false;
             this.btnLast.Text = "Last >|";
             this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Visible = false;
             // 
             // btnDone
             // 
@@ -237,6 +254,8 @@ namespace KWSalesOrderFormProject
             this.btnNext.TabStop = false;
             this.btnNext.Text = "Next >";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Visible = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrevious
             // 
@@ -248,26 +267,28 @@ namespace KWSalesOrderFormProject
             this.btnPrevious.TabStop = false;
             this.btnPrevious.Text = "< Pervious";
             this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Visible = false;
             // 
-            // btnAuthors
+            // btnRepairs
             // 
-            this.btnAuthors.Location = new System.Drawing.Point(93, 524);
-            this.btnAuthors.Name = "btnAuthors";
-            this.btnAuthors.Size = new System.Drawing.Size(75, 23);
-            this.btnAuthors.TabIndex = 49;
-            this.btnAuthors.TabStop = false;
-            this.btnAuthors.Text = "A&uthors";
-            this.btnAuthors.UseVisualStyleBackColor = true;
+            this.btnRepairs.Location = new System.Drawing.Point(93, 524);
+            this.btnRepairs.Name = "btnRepairs";
+            this.btnRepairs.Size = new System.Drawing.Size(75, 23);
+            this.btnRepairs.TabIndex = 49;
+            this.btnRepairs.TabStop = false;
+            this.btnRepairs.Text = "Repairs";
+            this.btnRepairs.UseVisualStyleBackColor = true;
             // 
-            // btnPublishers
+            // btnInventory
             // 
-            this.btnPublishers.Location = new System.Drawing.Point(221, 524);
-            this.btnPublishers.Name = "btnPublishers";
-            this.btnPublishers.Size = new System.Drawing.Size(75, 23);
-            this.btnPublishers.TabIndex = 48;
-            this.btnPublishers.TabStop = false;
-            this.btnPublishers.Text = "&Publishers";
-            this.btnPublishers.UseVisualStyleBackColor = true;
+            this.btnInventory.Location = new System.Drawing.Point(221, 524);
+            this.btnInventory.Name = "btnInventory";
+            this.btnInventory.Size = new System.Drawing.Size(75, 23);
+            this.btnInventory.TabIndex = 48;
+            this.btnInventory.TabStop = false;
+            this.btnInventory.Text = "Inventory";
+            this.btnInventory.UseVisualStyleBackColor = true;
+            this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
             // 
             // printPreview
             // 
@@ -281,7 +302,7 @@ namespace KWSalesOrderFormProject
             // 
             // picTools
             // 
-            this.picTools.Image = ((System.Drawing.Image)(resources.GetObject("picTools.Image")));
+            this.picTools.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
             this.picTools.InitialImage = null;
             this.picTools.Location = new System.Drawing.Point(320, 524);
             this.picTools.Name = "picTools";
@@ -289,6 +310,152 @@ namespace KWSalesOrderFormProject
             this.picTools.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picTools.TabIndex = 50;
             this.picTools.TabStop = false;
+            this.picTools.Click += new System.EventHandler(this.picTools_Click);
+            // 
+            // lblCustID
+            // 
+            this.lblCustID.AutoSize = true;
+            this.lblCustID.Location = new System.Drawing.Point(12, 92);
+            this.lblCustID.Name = "lblCustID";
+            this.lblCustID.Size = new System.Drawing.Size(68, 13);
+            this.lblCustID.TabIndex = 51;
+            this.lblCustID.Text = "Customer ID:";
+            this.lblCustID.Visible = false;
+            // 
+            // lblItemID
+            // 
+            this.lblItemID.AutoSize = true;
+            this.lblItemID.Location = new System.Drawing.Point(12, 118);
+            this.lblItemID.Name = "lblItemID";
+            this.lblItemID.Size = new System.Drawing.Size(41, 13);
+            this.lblItemID.TabIndex = 52;
+            this.lblItemID.Text = "ItemID:";
+            this.lblItemID.Visible = false;
+            this.lblItemID.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // lblSKUNumber
+            // 
+            this.lblSKUNumber.AutoSize = true;
+            this.lblSKUNumber.Location = new System.Drawing.Point(12, 144);
+            this.lblSKUNumber.Name = "lblSKUNumber";
+            this.lblSKUNumber.Size = new System.Drawing.Size(72, 13);
+            this.lblSKUNumber.TabIndex = 53;
+            this.lblSKUNumber.Text = "SKU Number:";
+            this.lblSKUNumber.Visible = false;
+            // 
+            // lblProductName
+            // 
+            this.lblProductName.AutoSize = true;
+            this.lblProductName.Location = new System.Drawing.Point(12, 170);
+            this.lblProductName.Name = "lblProductName";
+            this.lblProductName.Size = new System.Drawing.Size(78, 13);
+            this.lblProductName.TabIndex = 54;
+            this.lblProductName.Text = "Product Name:";
+            this.lblProductName.Visible = false;
+            // 
+            // txtCustID
+            // 
+            this.txtCustID.Location = new System.Drawing.Point(96, 89);
+            this.txtCustID.Name = "txtCustID";
+            this.txtCustID.Size = new System.Drawing.Size(413, 20);
+            this.txtCustID.TabIndex = 55;
+            this.txtCustID.Visible = false;
+            this.txtCustID.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // txtItemID
+            // 
+            this.txtItemID.Location = new System.Drawing.Point(96, 115);
+            this.txtItemID.Name = "txtItemID";
+            this.txtItemID.Size = new System.Drawing.Size(413, 20);
+            this.txtItemID.TabIndex = 56;
+            this.txtItemID.Visible = false;
+            // 
+            // txtSKUNumber
+            // 
+            this.txtSKUNumber.Location = new System.Drawing.Point(96, 141);
+            this.txtSKUNumber.Name = "txtSKUNumber";
+            this.txtSKUNumber.Size = new System.Drawing.Size(413, 20);
+            this.txtSKUNumber.TabIndex = 57;
+            this.txtSKUNumber.Text = "0000-000-000";
+            this.txtSKUNumber.Visible = false;
+            // 
+            // txtProductName
+            // 
+            this.txtProductName.Location = new System.Drawing.Point(96, 167);
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.Size = new System.Drawing.Size(413, 20);
+            this.txtProductName.TabIndex = 58;
+            this.txtProductName.Visible = false;
+            this.txtProductName.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
+            // 
+            // btnAddCust
+            // 
+            this.btnAddCust.Location = new System.Drawing.Point(93, 408);
+            this.btnAddCust.Name = "btnAddCust";
+            this.btnAddCust.Size = new System.Drawing.Size(156, 23);
+            this.btnAddCust.TabIndex = 59;
+            this.btnAddCust.TabStop = false;
+            this.btnAddCust.Text = "Add New Customer";
+            this.btnAddCust.UseVisualStyleBackColor = true;
+            this.btnAddCust.Click += new System.EventHandler(this.btnAddCust_Click);
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(96, 193);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(413, 20);
+            this.txtEmail.TabIndex = 61;
+            this.txtEmail.Text = "example@email.com";
+            this.txtEmail.Visible = false;
+            this.txtEmail.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(12, 196);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(35, 13);
+            this.lblEmail.TabIndex = 60;
+            this.lblEmail.Text = "Email:";
+            this.lblEmail.Visible = false;
+            this.lblEmail.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(96, 219);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(413, 20);
+            this.txtAddress.TabIndex = 63;
+            this.txtAddress.Visible = false;
+            // 
+            // lblAddress
+            // 
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Location = new System.Drawing.Point(12, 222);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(48, 13);
+            this.lblAddress.TabIndex = 62;
+            this.lblAddress.Text = "Address:";
+            this.lblAddress.Visible = false;
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(96, 245);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(413, 20);
+            this.txtPhone.TabIndex = 65;
+            this.txtPhone.Text = "___-___-____";
+            this.txtPhone.Visible = false;
+            // 
+            // lblPhone
+            // 
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Location = new System.Drawing.Point(12, 248);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(41, 13);
+            this.lblPhone.TabIndex = 64;
+            this.lblPhone.Text = "Phone:";
+            this.lblPhone.Visible = false;
             // 
             // frmRented
             // 
@@ -296,9 +463,24 @@ namespace KWSalesOrderFormProject
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 559);
             this.ControlBox = false;
+            this.Controls.Add(this.txtPhone);
+            this.Controls.Add(this.lblPhone);
+            this.Controls.Add(this.txtAddress);
+            this.Controls.Add(this.lblAddress);
+            this.Controls.Add(this.txtEmail);
+            this.Controls.Add(this.lblEmail);
+            this.Controls.Add(this.btnAddCust);
+            this.Controls.Add(this.txtProductName);
+            this.Controls.Add(this.txtSKUNumber);
+            this.Controls.Add(this.txtItemID);
+            this.Controls.Add(this.txtCustID);
+            this.Controls.Add(this.lblProductName);
+            this.Controls.Add(this.lblSKUNumber);
+            this.Controls.Add(this.lblItemID);
+            this.Controls.Add(this.lblCustID);
             this.Controls.Add(this.picTools);
-            this.Controls.Add(this.btnAuthors);
-            this.Controls.Add(this.btnPublishers);
+            this.Controls.Add(this.btnRepairs);
+            this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnDone);
@@ -327,6 +509,7 @@ namespace KWSalesOrderFormProject
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTools)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -351,10 +534,25 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
-        private System.Windows.Forms.Button btnAuthors;
-        private System.Windows.Forms.Button btnPublishers;
+        private System.Windows.Forms.Button btnRepairs;
+        private System.Windows.Forms.Button btnInventory;
         private System.Windows.Forms.PrintPreviewDialog printPreview;
         private System.Windows.Forms.PictureBox picTools;
+        private System.Windows.Forms.Label lblCustID;
+        private System.Windows.Forms.Label lblItemID;
+        private System.Windows.Forms.Label lblSKUNumber;
+        private System.Windows.Forms.Label lblProductName;
+        private System.Windows.Forms.TextBox txtCustID;
+        private System.Windows.Forms.TextBox txtItemID;
+        private System.Windows.Forms.TextBox txtSKUNumber;
+        private System.Windows.Forms.TextBox txtProductName;
+        private System.Windows.Forms.Button btnAddCust;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.Label lblPhone;
     }
 }
 

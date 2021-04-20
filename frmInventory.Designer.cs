@@ -29,8 +29,6 @@ namespace KWSalesOrderFormProject
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAuthors = new System.Windows.Forms.Button();
-            this.btnPublishers = new System.Windows.Forms.Button();
             this.btnFirst = new System.Windows.Forms.Button();
             this.btnLast = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
@@ -43,33 +41,13 @@ namespace KWSalesOrderFormProject
             this.btnPrevious = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.grdRentals = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.grdInventory = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdRentals)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdInventory)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnAuthors
-            // 
-            this.btnAuthors.Location = new System.Drawing.Point(93, 524);
-            this.btnAuthors.Name = "btnAuthors";
-            this.btnAuthors.Size = new System.Drawing.Size(75, 23);
-            this.btnAuthors.TabIndex = 67;
-            this.btnAuthors.TabStop = false;
-            this.btnAuthors.Text = "A&uthors";
-            this.btnAuthors.UseVisualStyleBackColor = true;
-            // 
-            // btnPublishers
-            // 
-            this.btnPublishers.Location = new System.Drawing.Point(219, 524);
-            this.btnPublishers.Name = "btnPublishers";
-            this.btnPublishers.Size = new System.Drawing.Size(75, 23);
-            this.btnPublishers.TabIndex = 66;
-            this.btnPublishers.TabStop = false;
-            this.btnPublishers.Text = "&Publishers";
-            this.btnPublishers.UseVisualStyleBackColor = true;
             // 
             // btnFirst
             // 
@@ -81,6 +59,7 @@ namespace KWSalesOrderFormProject
             this.btnFirst.TabStop = false;
             this.btnFirst.Text = "|< First";
             this.btnFirst.UseVisualStyleBackColor = true;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // btnLast
             // 
@@ -92,6 +71,7 @@ namespace KWSalesOrderFormProject
             this.btnLast.TabStop = false;
             this.btnLast.Text = "Last >|";
             this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // btnDone
             // 
@@ -166,6 +146,7 @@ namespace KWSalesOrderFormProject
             this.btnNext.TabStop = false;
             this.btnNext.Text = "Next >";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrevious
             // 
@@ -177,6 +158,7 @@ namespace KWSalesOrderFormProject
             this.btnPrevious.TabStop = false;
             this.btnPrevious.Text = "< Pervious";
             this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // lblTitle
             // 
@@ -190,20 +172,13 @@ namespace KWSalesOrderFormProject
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 65);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 54;
             this.pictureBox1.TabStop = false;
-            // 
-            // grdRentals
-            // 
-            this.grdRentals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdRentals.Location = new System.Drawing.Point(12, 83);
-            this.grdRentals.Name = "grdRentals";
-            this.grdRentals.Size = new System.Drawing.Size(497, 239);
-            this.grdRentals.TabIndex = 53;
             // 
             // btnExit
             // 
@@ -213,6 +188,7 @@ namespace KWSalesOrderFormProject
             this.btnExit.TabIndex = 52;
             this.btnExit.Text = "E&xit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnPrint
             // 
@@ -234,13 +210,19 @@ namespace KWSalesOrderFormProject
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
+            // grdInventory
+            // 
+            this.grdInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdInventory.Location = new System.Drawing.Point(12, 83);
+            this.grdInventory.Name = "grdInventory";
+            this.grdInventory.Size = new System.Drawing.Size(497, 239);
+            this.grdInventory.TabIndex = 53;
+            // 
             // frmInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 559);
-            this.Controls.Add(this.btnAuthors);
-            this.Controls.Add(this.btnPublishers);
             this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnDone);
@@ -253,22 +235,21 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.grdRentals);
+            this.Controls.Add(this.grdInventory);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnConnect);
             this.Name = "frmInventory";
             this.Text = "frmInventory";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmInventory_FormClosing);
+            this.Load += new System.EventHandler(this.frmInventory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdRentals)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdInventory)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAuthors;
-        private System.Windows.Forms.Button btnPublishers;
         private System.Windows.Forms.Button btnFirst;
         private System.Windows.Forms.Button btnLast;
         private System.Windows.Forms.Button btnDone;
@@ -281,9 +262,9 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridView grdRentals;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.DataGridView grdInventory;
     }
 }

@@ -28,6 +28,13 @@ namespace KWSalesOrderFormProject
         SqlDataAdapter rentalAdapter;
         DataTable rentalTable;
         CurrencyManager rentalManager;
+
+        SqlConnection inventoryConnection;
+        SqlCommand inventoryCommand;
+        SqlCommandBuilder inventoryCommandBuilder;
+        SqlDataAdapter inventoryAdapter;
+        DataTable inventoryTable;
+        CurrencyManager inventoryManager;
         public frmRented()
         {
             InitializeComponent();
@@ -40,7 +47,8 @@ namespace KWSalesOrderFormProject
                 try
                 {
                     
-                    rentalConnection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB;" +
+                    rentalConnection = new SqlConnection(
+                        "Data Source = (LocalDB)\\MSSQLLocalDB;" +
                         "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf; " +
                         "Integrated Security = True;" +
                         "Connect Timeout=30;");
@@ -97,7 +105,7 @@ namespace KWSalesOrderFormProject
 
         private void frmKWSales_Load(object sender, EventArgs e)
         {
-
+            SetState("Connect");
         }
 
         private void frmKWSales_FormClosing(object sender, FormClosingEventArgs e)
@@ -174,8 +182,89 @@ namespace KWSalesOrderFormProject
             Font myFont = new Font("Arial", 24, FontStyle.Bold);
             SizeF sSize = e.Graphics.MeasureString(s, myFont);
             Bitmap bm = new Bitmap(this.grdRentals.Width, this.grdRentals.Height);
-            grdRentals.DrawToBitmap(bm, new Rectangle(0, 0, this.grdRentals.Width, this.grdRentals.Height));
+            grdRentals.DrawToBitmap(bm, new Rectangle(10, 175, this.grdRentals.Width, this.grdRentals.Height));
             e.Graphics.DrawImage(bm, 0, 0);
+        }
+
+        private void btnInventory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmInventory inventoryForm = new frmInventory();
+                inventoryForm.ShowDialog();
+                inventoryForm.Dispose();
+                // need to regenerate publishers data
+                rentalConnection.Close();
+                inventoryConnection = new SqlConnection(
+                    "Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                    "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf;" +
+                    "Integrated Security=True;" +
+                    "Connect Timeout=30");
+                inventoryConnection.Open();
+
+                inventoryCommand = new SqlCommand(
+                    "SELECT	*" +
+                    "FROM intentoryTable ", inventoryConnection);
+
+                inventoryAdapter = new SqlDataAdapter();
+                inventoryAdapter.SelectCommand = inventoryCommand;
+
+                inventoryCommandBuilder = new SqlCommandBuilder(inventoryAdapter);
+                inventoryTable = new DataTable();
+                inventoryAdapter.Fill(inventoryTable);
+                grdRentals.ReadOnly = true;
+                grdRentals.DataSource = inventoryTable;
+
+                inventoryManager = (CurrencyManager)
+                    this.BindingContext[inventoryTable];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picTools_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddCust_Click(object sender, EventArgs e)
+        {
+            SetState("Add Customer");
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         /*private bool ValidateData()
@@ -229,6 +318,7 @@ namespace KWSalesOrderFormProject
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
                     btnDone.Enabled = false;
+                    btnPrint.Enabled = false;
                     /*grpFindTitle.Enabled = false;
                     cboPublisher.Enabled = false;
                     btnPublishers.Enabled = false;
@@ -254,6 +344,16 @@ namespace KWSalesOrderFormProject
                     btnEdit.Enabled = true;
                     btnDelete.Enabled = true;
                     btnDone.Enabled = true;
+                    btnPrint.Enabled = true;
+                    grdRentals.Visible = true;
+                    lblCustID.Visible = false;
+                    lblItemID.Visible = false;
+                    lblProductName.Visible = false;
+                    lblSKUNumber.Visible = false;
+                    txtCustID.Visible = false;
+                    txtItemID.Visible = false;
+                    txtProductName.Visible = false;
+                    txtSKUNumber.Visible = false;
                     /*grpFindTitle.Enabled = true;
                     btnPublishers.Enabled = true;
                     cboPublisher.Enabled = false;
@@ -266,6 +366,38 @@ namespace KWSalesOrderFormProject
                     btnXAuthor3.Enabled = false;
                     btnXAuthor4.Enabled = false;
                     txtTitle.Focus();*/
+                    break;
+                case "Add Customer":
+                    btnFirst.Enabled = false;
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = false;
+                    btnLast.Enabled = false;
+                    btnAddNew.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnDone.Enabled = false;
+                    btnPrint.Enabled = false;
+                    grdRentals.Visible = false;
+                    lblCustID.Text = "CustomerID:";
+                    lblItemID.Text = "First Name:";
+                    lblProductName.Text = "Middle Name:";
+                    lblSKUNumber.Text = "Last Name:";
+                    lblCustID.Visible = true;
+                    lblItemID.Visible = true;
+                    lblProductName.Visible = true;
+                    lblSKUNumber.Visible = true;
+                    lblEmail.Visible = true;
+                    lblAddress.Visible = true;
+                    lblPhone.Visible = true;
+                    txtCustID.Visible = true;
+                    txtItemID.Visible = true;
+                    txtProductName.Visible = true;
+                    txtSKUNumber.Visible = true;
+                    txtEmail.Visible = true;
+                    txtAddress.Visible = true;
+                    txtPhone.Visible = true;
                     break;
                 //Add or Edit State
                 default:
@@ -297,6 +429,16 @@ namespace KWSalesOrderFormProject
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
                     btnDone.Enabled = false;
+                    btnPrint.Enabled = false;
+                    grdRentals.Visible = false;
+                    lblCustID.Visible = true;
+                    lblItemID.Visible = true;
+                    lblProductName.Visible = true;
+                    lblSKUNumber.Visible = true;
+                    txtCustID.Visible = true;
+                    txtItemID.Visible = true;
+                    txtProductName.Visible = true;
+                    txtSKUNumber.Visible = true;
                     /*grpFindTitle.Enabled = false;
                     cboPublisher.Enabled = true;
                     cboAuthor1.Enabled = true;
