@@ -16,7 +16,9 @@ namespace KWSalesOrderFormProject
 {
     public partial class frmRented : Form
     {
-        bool selectedFile = false;
+        bool selectedFile = false,
+            addTicket = false,
+            addCust = false;
         string myState;
         int myBookmark,
             pageNumber;
@@ -128,6 +130,31 @@ namespace KWSalesOrderFormProject
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (addTicket == true)
+                {
+
+                    MessageBox.Show("Ticket saved.",
+                        "Save",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else if (addCust == true)
+                {
+                    MessageBox.Show("Customer saved.",
+                        "Save",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error saving information.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
             SetState("View");
         }
 
@@ -138,6 +165,7 @@ namespace KWSalesOrderFormProject
                 myBookmark = rentalManager.Position;
                 rentalManager.AddNew();
                 SetState("Add");
+                addTicket = true;
             }
             catch (Exception ex)
             {
@@ -250,6 +278,7 @@ namespace KWSalesOrderFormProject
         private void btnAddCust_Click(object sender, EventArgs e)
         {
             SetState("Add Customer");
+            addCust = true;
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
@@ -319,6 +348,7 @@ namespace KWSalesOrderFormProject
                     btnDelete.Enabled = false;
                     btnDone.Enabled = false;
                     btnPrint.Enabled = false;
+                    btnAddCust.Enabled = false;
                     /*grpFindTitle.Enabled = false;
                     cboPublisher.Enabled = false;
                     btnPublishers.Enabled = false;
@@ -334,6 +364,7 @@ namespace KWSalesOrderFormProject
                     txtNotes.ReadOnly = true;
                     txtSubject.ReadOnly = true;
                     txtComments.ReadOnly = true;*/
+                    btnAddCust.Enabled = true;
                     btnFirst.Enabled = true;
                     btnPrevious.Enabled = true;
                     btnNext.Enabled = true;
@@ -349,11 +380,21 @@ namespace KWSalesOrderFormProject
                     lblCustID.Visible = false;
                     lblItemID.Visible = false;
                     lblProductName.Visible = false;
+                    lblLastName.Visible = false;
                     lblSKUNumber.Visible = false;
+                    lblEmail.Visible = false;
+                    lblAddress.Visible = false;
+                    lblPhone.Visible = false;
+                    txtLastName.Visible = false;
                     txtCustID.Visible = false;
                     txtItemID.Visible = false;
                     txtProductName.Visible = false;
                     txtSKUNumber.Visible = false;
+                    txtEmail.Visible = false;
+                    txtAddress.Visible = false;
+                    txtPhone.Visible = false;
+                    addCust = false;
+                    addTicket = false;
                     /*grpFindTitle.Enabled = true;
                     btnPublishers.Enabled = true;
                     cboPublisher.Enabled = false;
@@ -379,8 +420,9 @@ namespace KWSalesOrderFormProject
                     btnDelete.Enabled = false;
                     btnDone.Enabled = false;
                     btnPrint.Enabled = false;
+                    btnAddCust.Enabled = false;
                     grdRentals.Visible = false;
-                    lblCustID.Text = "CustomerID:";
+                    lblCustID.Text = "Customer ID:";
                     lblItemID.Text = "First Name:";
                     lblProductName.Text = "Middle Name:";
                     lblSKUNumber.Text = "Last Name:";
@@ -388,6 +430,7 @@ namespace KWSalesOrderFormProject
                     lblItemID.Visible = true;
                     lblProductName.Visible = true;
                     lblSKUNumber.Visible = true;
+                    lblLastName.Visible = true;
                     lblEmail.Visible = true;
                     lblAddress.Visible = true;
                     lblPhone.Visible = true;
@@ -395,6 +438,7 @@ namespace KWSalesOrderFormProject
                     txtItemID.Visible = true;
                     txtProductName.Visible = true;
                     txtSKUNumber.Visible = true;
+                    txtLastName.Visible = true;
                     txtEmail.Visible = true;
                     txtAddress.Visible = true;
                     txtPhone.Visible = true;
@@ -435,6 +479,10 @@ namespace KWSalesOrderFormProject
                     lblItemID.Visible = true;
                     lblProductName.Visible = true;
                     lblSKUNumber.Visible = true;
+                    lblCustID.Text = "Customer ID:";
+                    lblItemID.Text = "Item ID:";
+                    lblProductName.Text = "Product Name:";
+                    lblSKUNumber.Text = "SKU Number:";
                     txtCustID.Visible = true;
                     txtItemID.Visible = true;
                     txtProductName.Visible = true;
