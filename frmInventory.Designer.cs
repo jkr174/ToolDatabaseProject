@@ -43,8 +43,9 @@ namespace KWSalesOrderFormProject
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.btnConnect = new System.Windows.Forms.Button();
             this.grdInventory = new System.Windows.Forms.DataGridView();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdInventory)).BeginInit();
             this.SuspendLayout();
@@ -103,6 +104,7 @@ namespace KWSalesOrderFormProject
             this.btnAddNew.TabStop = false;
             this.btnAddNew.Text = "&Add New";
             this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnCancel
             // 
@@ -114,6 +116,7 @@ namespace KWSalesOrderFormProject
             this.btnCancel.TabStop = false;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -125,6 +128,7 @@ namespace KWSalesOrderFormProject
             this.btnSave.TabStop = false;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnEdit
             // 
@@ -135,6 +139,7 @@ namespace KWSalesOrderFormProject
             this.btnEdit.TabStop = false;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnNext
             // 
@@ -200,29 +205,39 @@ namespace KWSalesOrderFormProject
             this.btnPrint.Text = "&Print";
             this.btnPrint.UseVisualStyleBackColor = true;
             // 
-            // btnConnect
-            // 
-            this.btnConnect.Location = new System.Drawing.Point(434, 524);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(75, 23);
-            this.btnConnect.TabIndex = 50;
-            this.btnConnect.Text = "&Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
-            // 
             // grdInventory
             // 
             this.grdInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdInventory.Location = new System.Drawing.Point(12, 83);
+            this.grdInventory.Location = new System.Drawing.Point(12, 121);
             this.grdInventory.Name = "grdInventory";
             this.grdInventory.Size = new System.Drawing.Size(497, 239);
             this.grdInventory.TabIndex = 53;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Enabled = false;
+            this.txtSearch.Location = new System.Drawing.Point(130, 83);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(217, 20);
+            this.txtSearch.TabIndex = 67;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 86);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 13);
+            this.label1.TabIndex = 68;
+            this.label1.Text = "Search by Item Name:";
             // 
             // frmInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 559);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnDone);
@@ -238,7 +253,6 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.grdInventory);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.btnConnect);
             this.Name = "frmInventory";
             this.Text = "frmInventory";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmInventory_FormClosing);
@@ -246,6 +260,7 @@ namespace KWSalesOrderFormProject
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdInventory)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -264,7 +279,8 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.DataGridView grdInventory;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label1;
     }
 }

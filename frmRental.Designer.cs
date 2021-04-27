@@ -32,18 +32,13 @@ namespace KWSalesOrderFormProject
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRented));
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
-            this.btnConnect = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.toolRentalsDBDataSet = new KWSalesOrderFormProject.ToolRentalsDBDataSet();
             this.rentedItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rentedItemsTableAdapter = new KWSalesOrderFormProject.ToolRentalsDBDataSetTableAdapters.rentedItemsTableAdapter();
             this.grdRentals = new System.Windows.Forms.DataGridView();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnFirst = new System.Windows.Forms.Button();
             this.btnLast = new System.Windows.Forms.Button();
-            this.btnDone = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -54,7 +49,6 @@ namespace KWSalesOrderFormProject
             this.btnRepairs = new System.Windows.Forms.Button();
             this.btnInventory = new System.Windows.Forms.Button();
             this.printPreview = new System.Windows.Forms.PrintPreviewDialog();
-            this.picTools = new System.Windows.Forms.PictureBox();
             this.lblCustID = new System.Windows.Forms.Label();
             this.lblItemID = new System.Windows.Forms.Label();
             this.lblSKUNumber = new System.Windows.Forms.Label();
@@ -72,26 +66,19 @@ namespace KWSalesOrderFormProject
             this.lblPhone = new System.Windows.Forms.Label();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.lblLastName = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.toolRentalsDBDataSet)).BeginInit();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.picTools = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.rentedItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdRentals)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTools)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dlgOpen
             // 
             this.dlgOpen.Filter = "SQL Server Databases (*.mdf)|*.mdf";
-            // 
-            // btnConnect
-            // 
-            this.btnConnect.Location = new System.Drawing.Point(434, 524);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(75, 23);
-            this.btnConnect.TabIndex = 0;
-            this.btnConnect.Text = "&Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // btnPrint
             // 
@@ -105,7 +92,7 @@ namespace KWSalesOrderFormProject
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(12, 524);
+            this.btnExit.Location = new System.Drawing.Point(353, 495);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 3;
@@ -113,24 +100,10 @@ namespace KWSalesOrderFormProject
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // toolRentalsDBDataSet
-            // 
-            this.toolRentalsDBDataSet.DataSetName = "ToolRentalsDBDataSet";
-            this.toolRentalsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // rentedItemsBindingSource
-            // 
-            this.rentedItemsBindingSource.DataMember = "rentedItems";
-            this.rentedItemsBindingSource.DataSource = this.toolRentalsDBDataSet;
-            // 
-            // rentedItemsTableAdapter
-            // 
-            this.rentedItemsTableAdapter.ClearBeforeFill = true;
-            // 
             // grdRentals
             // 
             this.grdRentals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdRentals.Location = new System.Drawing.Point(12, 83);
+            this.grdRentals.Location = new System.Drawing.Point(12, 111);
             this.grdRentals.Name = "grdRentals";
             this.grdRentals.Size = new System.Drawing.Size(497, 239);
             this.grdRentals.TabIndex = 4;
@@ -144,16 +117,6 @@ namespace KWSalesOrderFormProject
             this.lblTitle.TabIndex = 37;
             this.lblTitle.Text = "Rental Tickets";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 65);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 36;
-            this.pictureBox1.TabStop = false;
             // 
             // btnFirst
             // 
@@ -178,17 +141,6 @@ namespace KWSalesOrderFormProject
             this.btnLast.Text = "Last >|";
             this.btnLast.UseVisualStyleBackColor = true;
             this.btnLast.Visible = false;
-            // 
-            // btnDone
-            // 
-            this.btnDone.Enabled = false;
-            this.btnDone.Location = new System.Drawing.Point(353, 495);
-            this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(75, 23);
-            this.btnDone.TabIndex = 45;
-            this.btnDone.TabStop = false;
-            this.btnDone.Text = "Do&ne";
-            this.btnDone.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
@@ -280,6 +232,7 @@ namespace KWSalesOrderFormProject
             this.btnRepairs.TabStop = false;
             this.btnRepairs.Text = "Repairs";
             this.btnRepairs.UseVisualStyleBackColor = true;
+            this.btnRepairs.Click += new System.EventHandler(this.btnRepairs_Click);
             // 
             // btnInventory
             // 
@@ -302,23 +255,10 @@ namespace KWSalesOrderFormProject
             this.printPreview.Name = "printPreview";
             this.printPreview.Visible = false;
             // 
-            // picTools
-            // 
-            this.picTools.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
-            this.picTools.InitialImage = null;
-            this.picTools.Location = new System.Drawing.Point(320, 524);
-            this.picTools.Name = "picTools";
-            this.picTools.Size = new System.Drawing.Size(27, 23);
-            this.picTools.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picTools.TabIndex = 50;
-            this.picTools.TabStop = false;
-            this.picTools.Visible = false;
-            this.picTools.Click += new System.EventHandler(this.picTools_Click);
-            // 
             // lblCustID
             // 
             this.lblCustID.AutoSize = true;
-            this.lblCustID.Location = new System.Drawing.Point(12, 92);
+            this.lblCustID.Location = new System.Drawing.Point(12, 120);
             this.lblCustID.Name = "lblCustID";
             this.lblCustID.Size = new System.Drawing.Size(68, 13);
             this.lblCustID.TabIndex = 51;
@@ -328,7 +268,7 @@ namespace KWSalesOrderFormProject
             // lblItemID
             // 
             this.lblItemID.AutoSize = true;
-            this.lblItemID.Location = new System.Drawing.Point(12, 118);
+            this.lblItemID.Location = new System.Drawing.Point(12, 146);
             this.lblItemID.Name = "lblItemID";
             this.lblItemID.Size = new System.Drawing.Size(41, 13);
             this.lblItemID.TabIndex = 52;
@@ -339,7 +279,7 @@ namespace KWSalesOrderFormProject
             // lblSKUNumber
             // 
             this.lblSKUNumber.AutoSize = true;
-            this.lblSKUNumber.Location = new System.Drawing.Point(12, 144);
+            this.lblSKUNumber.Location = new System.Drawing.Point(12, 172);
             this.lblSKUNumber.Name = "lblSKUNumber";
             this.lblSKUNumber.Size = new System.Drawing.Size(72, 13);
             this.lblSKUNumber.TabIndex = 53;
@@ -349,7 +289,7 @@ namespace KWSalesOrderFormProject
             // lblProductName
             // 
             this.lblProductName.AutoSize = true;
-            this.lblProductName.Location = new System.Drawing.Point(12, 170);
+            this.lblProductName.Location = new System.Drawing.Point(12, 198);
             this.lblProductName.Name = "lblProductName";
             this.lblProductName.Size = new System.Drawing.Size(78, 13);
             this.lblProductName.TabIndex = 54;
@@ -358,7 +298,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtCustID
             // 
-            this.txtCustID.Location = new System.Drawing.Point(96, 89);
+            this.txtCustID.Location = new System.Drawing.Point(96, 117);
             this.txtCustID.Name = "txtCustID";
             this.txtCustID.Size = new System.Drawing.Size(413, 20);
             this.txtCustID.TabIndex = 55;
@@ -367,7 +307,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtItemID
             // 
-            this.txtItemID.Location = new System.Drawing.Point(96, 115);
+            this.txtItemID.Location = new System.Drawing.Point(96, 143);
             this.txtItemID.Name = "txtItemID";
             this.txtItemID.Size = new System.Drawing.Size(413, 20);
             this.txtItemID.TabIndex = 56;
@@ -375,16 +315,15 @@ namespace KWSalesOrderFormProject
             // 
             // txtSKUNumber
             // 
-            this.txtSKUNumber.Location = new System.Drawing.Point(96, 141);
+            this.txtSKUNumber.Location = new System.Drawing.Point(96, 169);
             this.txtSKUNumber.Name = "txtSKUNumber";
             this.txtSKUNumber.Size = new System.Drawing.Size(413, 20);
             this.txtSKUNumber.TabIndex = 57;
-            this.txtSKUNumber.Text = "0000-000-000";
             this.txtSKUNumber.Visible = false;
             // 
             // txtProductName
             // 
-            this.txtProductName.Location = new System.Drawing.Point(96, 167);
+            this.txtProductName.Location = new System.Drawing.Point(96, 195);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(413, 20);
             this.txtProductName.TabIndex = 58;
@@ -405,7 +344,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(96, 219);
+            this.txtEmail.Location = new System.Drawing.Point(96, 247);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(413, 20);
             this.txtEmail.TabIndex = 61;
@@ -416,7 +355,7 @@ namespace KWSalesOrderFormProject
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(12, 222);
+            this.lblEmail.Location = new System.Drawing.Point(12, 250);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(35, 13);
             this.lblEmail.TabIndex = 60;
@@ -426,7 +365,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(96, 245);
+            this.txtAddress.Location = new System.Drawing.Point(96, 273);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(413, 20);
             this.txtAddress.TabIndex = 63;
@@ -435,7 +374,7 @@ namespace KWSalesOrderFormProject
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(12, 248);
+            this.lblAddress.Location = new System.Drawing.Point(12, 276);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(48, 13);
             this.lblAddress.TabIndex = 62;
@@ -444,7 +383,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(96, 271);
+            this.txtPhone.Location = new System.Drawing.Point(96, 299);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(413, 20);
             this.txtPhone.TabIndex = 65;
@@ -454,7 +393,7 @@ namespace KWSalesOrderFormProject
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(12, 274);
+            this.lblPhone.Location = new System.Drawing.Point(12, 302);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(41, 13);
             this.lblPhone.TabIndex = 64;
@@ -463,7 +402,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(96, 193);
+            this.txtLastName.Location = new System.Drawing.Point(96, 221);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(413, 20);
             this.txtLastName.TabIndex = 67;
@@ -472,12 +411,53 @@ namespace KWSalesOrderFormProject
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(12, 196);
+            this.lblLastName.Location = new System.Drawing.Point(12, 224);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(61, 13);
             this.lblLastName.TabIndex = 66;
             this.lblLastName.Text = "Last Name:";
             this.lblLastName.Visible = false;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Enabled = false;
+            this.txtSearch.Location = new System.Drawing.Point(137, 83);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(372, 20);
+            this.txtSearch.TabIndex = 69;
+            this.txtSearch.TextChanged += new System.EventHandler(this.textBox1_TextChanged_2);
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(12, 86);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(139, 13);
+            this.lblSearch.TabIndex = 68;
+            this.lblSearch.Text = "Search by Rental Ticket ID:";
+            // 
+            // picTools
+            // 
+            this.picTools.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
+            this.picTools.InitialImage = null;
+            this.picTools.Location = new System.Drawing.Point(320, 524);
+            this.picTools.Name = "picTools";
+            this.picTools.Size = new System.Drawing.Size(27, 23);
+            this.picTools.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTools.TabIndex = 50;
+            this.picTools.TabStop = false;
+            this.picTools.Visible = false;
+            this.picTools.Click += new System.EventHandler(this.picTools_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 65);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 36;
+            this.pictureBox1.TabStop = false;
             // 
             // frmRented
             // 
@@ -485,6 +465,8 @@ namespace KWSalesOrderFormProject
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 559);
             this.ControlBox = false;
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.txtPhone);
@@ -507,7 +489,6 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.btnLast);
-            this.Controls.Add(this.btnDone);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.btnCancel);
@@ -520,18 +501,16 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.grdRentals);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.btnConnect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmRented";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rent Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmKWSales_FormClosing);
             this.Load += new System.EventHandler(this.frmKWSales_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.toolRentalsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentedItemsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdRentals)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTools)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -539,18 +518,14 @@ namespace KWSalesOrderFormProject
 
         #endregion
         private System.Windows.Forms.OpenFileDialog dlgOpen;
-        private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnExit;
-        private ToolRentalsDBDataSet toolRentalsDBDataSet;
         private System.Windows.Forms.BindingSource rentedItemsBindingSource;
-        private ToolRentalsDBDataSetTableAdapters.rentedItemsTableAdapter rentedItemsTableAdapter;
         private System.Windows.Forms.DataGridView grdRentals;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnFirst;
         private System.Windows.Forms.Button btnLast;
-        private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnCancel;
@@ -579,6 +554,8 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label lblLastName;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label lblSearch;
     }
 }
 

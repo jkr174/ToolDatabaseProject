@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmRepairs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRepairs.Designer.cs">
+      <DependentUpon>frmRepairs.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,11 +81,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToolRentalsDBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ToolRentalsDBDataSet.xsd</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="frmRepairs.resx">
+      <DependentUpon>frmRepairs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmInventory.resx">
       <DependentUpon>frmInventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,30 +109,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="ToolRentalsDBDataSet.xsc">
-      <DependentUpon>ToolRentalsDBDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ToolRentalsDBDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ToolRentalsDBDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ToolRentalsDBDataSet.xss">
-      <DependentUpon>ToolRentalsDBDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\toolsIcon.png" />
-    <Content Include="ToolRentalsDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ToolRentalsDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>ToolRentalsDB.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

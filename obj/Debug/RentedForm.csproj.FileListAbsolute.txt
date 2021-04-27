@@ -21,6 +21,5 @@ C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\D
 C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\ToolRentalsDB.mdf
 C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\ToolRentalsDB_log.ldf
 C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\obj\Debug\KWSalesOrderFormProject.frmInventory.resources
-C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\ToolRentalsDB.mdf
-C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\ToolRentalsDB_log.ldf
 C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.frmInventory.resources
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.frmRepairs.resources
