@@ -17,9 +17,7 @@ namespace KWSalesOrderFormProject
     public partial class frmInventory : Form
     {
         bool selectedFile = false;
-        /*string myState;
-        int myBookmark,
-            pageNumber;*/
+        string myState;
         const int itemsPerPage = 45;
 
         SqlConnection inventoryConnection;
@@ -80,13 +78,7 @@ namespace KWSalesOrderFormProject
         {
             try
             {
-
-                inventoryConnection = new SqlConnection(
-                    "Data Source=(LocalDB)\\MSSQLLocalDB;" +
-                    "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf;" +
-                    "Integrated Security=True;" +
-                    "Connect Timeout=30");
-                inventoryConnection.Open();
+                InventoryConnection();
 
                 inventoryCommand = new SqlCommand(
                     "SELECT	*" +
@@ -103,8 +95,9 @@ namespace KWSalesOrderFormProject
 
                 inventoryManager = (CurrencyManager)
                     this.BindingContext[inventoryTable];
+                inventoryConnection.Close();
                 selectedFile = true;
-                //SetState("View");
+                SetState("View");
 
             }
             catch (Exception ex)
@@ -117,7 +110,7 @@ namespace KWSalesOrderFormProject
                     MessageBoxIcon.Error);
                 return;
             }
-            
+
         }
 
         private void btnFirst_Click(object sender, EventArgs e)
@@ -142,7 +135,7 @@ namespace KWSalesOrderFormProject
 
         private void frmInventory_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(selectedFile != false)
+            if (selectedFile != false)
             {
                 inventoryConnection.Dispose();
                 inventoryCommand.Dispose();
@@ -154,6 +147,122 @@ namespace KWSalesOrderFormProject
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void SetState(string appState)
+        {
+            myState = appState;
+            switch (appState)
+            {
+                case "View":
+                    btnFirst.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    btnNext.Enabled = true;
+                    btnLast.Enabled = true;
+                    btnAddNew.Enabled = true;
+                    btnSave.Enabled = false;
+                    btnCancel.Enabled = false;
+                    btnEdit.Enabled = true;
+                    btnDelete.Enabled = true;
+                    btnDone.Enabled = true;
+                    btnPrint.Enabled = true;
+                    txtSearch.Enabled = true;
+                    break;
+                //Add or Edit State
+                default:
+                    btnFirst.Enabled = false;
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = false;
+                    btnLast.Enabled = false;
+                    btnAddNew.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnDone.Enabled = false;
+                    btnPrint.Enabled = false;
+                    break;
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            SetState("Edit");
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error saving information.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            SetState("View");
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            inventoryManager.CancelCurrentEdit();
+            SetState("View");
+        }
+        private DataGridViewCell GetCellWhereTextExistsInGridView(string searchText, DataGridView dataGridView, int columnIndex)
+        {
+            DataGridViewCell cellWhereTextIsMet = null;
+
+            // For every row in the grid
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                // I did not test this case, but cell.Value is an object, and objects can be null
+                // So check if the cell is null before using .ToString()
+                if (row.Cells[columnIndex].Value != null && searchText == row.Cells[columnIndex].Value.ToString())
+                {
+                    // the searchText is equals to the text in this cell.
+                    cellWhereTextIsMet = row.Cells[columnIndex];
+                    break;
+                }
+            }
+
+            return cellWhereTextIsMet;
+        }
+        public void InventoryConnection()
+        {
+            inventoryConnection = new SqlConnection(
+                    "Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                    "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf;" +
+                    "Integrated Security=True;" +
+                    "Connect Timeout=30");
+            inventoryConnection.Open();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            InventoryConnection();
+
+            inventoryCommand = new SqlCommand(
+                "SELECT	*" +
+                "FROM intentoryTable " +
+                "WHERE Name LIKE '"+txtSearch.Text+"%'", inventoryConnection);
+
+            inventoryAdapter = new SqlDataAdapter();
+            inventoryAdapter.SelectCommand = inventoryCommand;
+
+            inventoryCommandBuilder = new SqlCommandBuilder(inventoryAdapter);
+            inventoryTable = new DataTable();
+            inventoryAdapter.Fill(inventoryTable);
+            grdInventory.ReadOnly = true;
+            grdInventory.DataSource = inventoryTable;
+
+            inventoryConnection.Close();
         }
     }
 }
