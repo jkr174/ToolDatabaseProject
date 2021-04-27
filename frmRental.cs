@@ -30,6 +30,13 @@ namespace KWSalesOrderFormProject
         SqlDataAdapter rentalAdapter;
         DataTable rentalTable;
         CurrencyManager rentalManager;
+
+        SqlConnection inventoryConnection;
+        SqlCommand inventoryCommand;
+        SqlCommandBuilder inventoryCommandBuilder;
+        SqlDataAdapter inventoryAdapter;
+        DataTable inventoryTable;
+        CurrencyManager inventoryManager;
         public frmRented()
         {
             InitializeComponent();
@@ -37,7 +44,60 @@ namespace KWSalesOrderFormProject
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            
+            /*if (dlgOpen.ShowDialog() == DialogResult.OK)
+            {*/
+                try
+                {
+                    
+                    rentalConnection = new SqlConnection(
+                        "Data Source = (LocalDB)\\MSSQLLocalDB;" +
+                        "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf; " +
+                        "Integrated Security = True;" +
+                        "Connect Timeout=30;");
+                    rentalConnection.Open();
+
+                    rentalCommand = new SqlCommand(
+                        "SELECT	RentID, COALESCE(FirstName, ' ') + COALESCE(' ', ' ') + COALESCE(LastName, ' ') AS CustomerName, ItemID, SKUNumber, ProductName, RentDate " +
+                        "FROM rentedItems " +
+                        "JOIN customersTable " +
+                        "ON rentedItems.CustomerID = customersTable.CustomerID ", rentalConnection);
+
+                    rentalAdapter = new SqlDataAdapter();
+                    rentalAdapter.SelectCommand = rentalCommand;
+
+                    rentalCommandBuilder = new SqlCommandBuilder(rentalAdapter);
+                    rentalTable = new DataTable();
+                    rentalAdapter.Fill(rentalTable);
+                    grdRentals.ReadOnly = true;
+                    grdRentals.DataSource = rentalTable;
+
+                    rentalManager = (CurrencyManager)
+                        this.BindingContext[rentalTable];
+                    
+                    SetState("View");
+
+                }
+                catch (Exception ex)
+                {
+                    selectedFile = false;
+                    MessageBox.Show(
+                        ex.Message,
+                        "Error establishing database file connection.",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+            /*}
+            else
+            {
+                selectedFile = false;
+                MessageBox.Show(
+                    "No file selected. Program will now exit.",
+                    "Program stopping",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                this.Close();
+            }*/
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -48,48 +108,14 @@ namespace KWSalesOrderFormProject
         private void frmKWSales_Load(object sender, EventArgs e)
         {
             SetState("Connect");
-            try
-            {
-                RentalConnection();
-
-                rentalCommand = new SqlCommand(
-                    "SELECT	RentID, COALESCE(FirstName, ' ') + COALESCE(' ', ' ') + COALESCE(LastName, ' ') AS CustomerName, ItemID, SKUNumber, ProductName, RentDate " +
-                    "FROM rentedItems " +
-                    "JOIN customersTable " +
-                    "ON rentedItems.CustomerID = customersTable.CustomerID ", rentalConnection);
-
-                rentalAdapter = new SqlDataAdapter();
-                rentalAdapter.SelectCommand = rentalCommand;
-
-                rentalCommandBuilder = new SqlCommandBuilder(rentalAdapter);
-                rentalTable = new DataTable();
-                rentalAdapter.Fill(rentalTable);
-                grdRentals.ReadOnly = true;
-                grdRentals.DataSource = rentalTable;
-
-                rentalManager = (CurrencyManager)
-                    this.BindingContext[rentalTable];
-
-                SetState("View");
-
-            }
-            catch (Exception ex)
-            {
-                selectedFile = false;
-                MessageBox.Show(
-                    ex.Message,
-                    "Error establishing database file connection.",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
         }
 
         private void frmKWSales_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            
             if (selectedFile != false)
             {
+                rentalConnection.Close();
                 rentalCommand.Dispose();
                 rentalCommandBuilder.Dispose();
                 rentalAdapter.Dispose();
@@ -104,37 +130,18 @@ namespace KWSalesOrderFormProject
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now;
             try
             {
                 if (addTicket == true)
                 {
-                    RentalConnection();
-                    rentalCommand = new SqlCommand("INSERT INTO rentedItems (CustomerID, ItemID, SKUNumber, ProductName, RentDate) " +
-                        "VALUES " +
-                        txtCustID.Text + " " +
-                        txtItemID.Text + " " +
-                        txtSKUNumber.Text + " " +
-                        txtProductName.Text + " " +
-                        now + " ", rentalConnection);
+
                     MessageBox.Show("Ticket saved.",
                         "Save",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-                    rentalConnection.Close();
                 }
                 else if (addCust == true)
                 {
-                    rentalCommand = new SqlCommand("INSERT INTO customersTable (CustomerID, FirstName, MiddleName, LastName, Email, Address, Phone) " +
-                        "VALUES " +
-                        txtCustID.Text + " " +
-                        txtItemID.Text + " " +
-                        txtSKUNumber.Text + " " +
-                        txtProductName.Text + " " +
-                        txtLastName.Text + " " +
-                        txtEmail.Text + " " +
-                        txtAddress.Text + " " +
-                        txtPhone.Text + " ", rentalConnection);
                     MessageBox.Show("Customer saved.",
                         "Save",
                         MessageBoxButtons.OK,
@@ -172,6 +179,8 @@ namespace KWSalesOrderFormProject
         private void btnCancel_Click(object sender, EventArgs e)
         {
             rentalManager.CancelCurrentEdit();
+            if (myState.Equals("Add"))
+                rentalManager.Position = myBookmark;
             SetState("View");
         }
 
@@ -204,15 +213,7 @@ namespace KWSalesOrderFormProject
             grdRentals.DrawToBitmap(bm, new Rectangle(10, 175, this.grdRentals.Width, this.grdRentals.Height));
             e.Graphics.DrawImage(bm, 0, 0);
         }
-        public void RentalConnection()
-        {
-            rentalConnection = new SqlConnection(
-                    "Data Source = (LocalDB)\\MSSQLLocalDB;" +
-                    "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf; " +
-                    "Integrated Security = True;" +
-                    "Connect Timeout=30;");
-            rentalConnection.Open();
-        }
+
         private void btnInventory_Click(object sender, EventArgs e)
         {
             try
@@ -220,7 +221,30 @@ namespace KWSalesOrderFormProject
                 frmInventory inventoryForm = new frmInventory();
                 inventoryForm.ShowDialog();
                 inventoryForm.Dispose();
-                
+                // need to regenerate publishers data
+                rentalConnection.Close();
+                inventoryConnection = new SqlConnection(
+                    "Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                    "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf;" +
+                    "Integrated Security=True;" +
+                    "Connect Timeout=30");
+                inventoryConnection.Open();
+
+                inventoryCommand = new SqlCommand(
+                    "SELECT	*" +
+                    "FROM intentoryTable ", inventoryConnection);
+
+                inventoryAdapter = new SqlDataAdapter();
+                inventoryAdapter.SelectCommand = inventoryCommand;
+
+                inventoryCommandBuilder = new SqlCommandBuilder(inventoryAdapter);
+                inventoryTable = new DataTable();
+                inventoryAdapter.Fill(inventoryTable);
+                grdRentals.ReadOnly = true;
+                grdRentals.DataSource = inventoryTable;
+
+                inventoryManager = (CurrencyManager)
+                    this.BindingContext[inventoryTable];
             }
             catch (Exception ex)
             {
@@ -262,38 +286,6 @@ namespace KWSalesOrderFormProject
 
         }
 
-        private void textBox1_TextChanged_2(object sender, EventArgs e)
-        {
-            RentalConnection();
-            rentalAdapter = new SqlDataAdapter(
-                "SELECT	* " +
-                "FROM rentedItems " +
-                "WHERE RentID " +
-                "LIKE '"+ txtSearch.Text +"%'", rentalConnection);
-            rentalTable = new DataTable();
-            rentalAdapter.Fill(rentalTable);
-            grdRentals.DataSource = rentalTable;
-            rentalConnection.Close();
-        }
-
-        private void btnRepairs_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                frmRepairs repairsForm = new frmRepairs();
-                repairsForm.ShowDialog();
-                repairsForm.Dispose();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message,
-                    "Error!",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-        }
-
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -303,12 +295,48 @@ namespace KWSalesOrderFormProject
         {
 
         }
+
+        /*private bool ValidateData()
+{
+   string message = "";
+   bool allOK = true;
+   if (txtTitle.Text.Equals(""))
+   {
+       message = "You must input a Title.\r\n";
+       txtTitle.Focus();
+       allOK = false;
+   }
+   int inputYear, currentYear;
+   // Check length and range on Year Published
+   if (!txtYear.Text.Trim().Equals(""))
+   {
+       inputYear = Convert.ToInt32(txtYear.Text);
+       currentYear = DateTime.Now.Year;
+       if (inputYear > currentYear || inputYear < currentYear - 150)
+       {
+           message += "Year published must be between " +
+           (currentYear - 150).ToString() + " and " +
+           currentYear.ToString() + "\r\n";
+           txtYear.Focus();
+           allOK = false;
+       }
+   }
+}*/
+
         private void SetState(string appState)
         {
             myState = appState;
             switch (appState)
             {
                 case "Connect":
+                    /*txtTitle.ReadOnly = true;
+                    txtYear.ReadOnly = true;
+                    txtISBN.ReadOnly = true;
+                    txtTitle.ReadOnly = true;
+                    txtDescription.ReadOnly = true;
+                    txtNotes.ReadOnly = true;
+                    txtSubject.ReadOnly = true;
+                    txtComments.ReadOnly = true;*/
                     btnFirst.Enabled = false;
                     btnPrevious.Enabled = false;
                     btnNext.Enabled = false;
@@ -318,13 +346,24 @@ namespace KWSalesOrderFormProject
                     btnCancel.Enabled = false;
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
+                    btnDone.Enabled = false;
                     btnPrint.Enabled = false;
                     btnAddCust.Enabled = false;
-                    btnInventory.Enabled = false;
-                    btnRepairs.Enabled = false;
-                    txtSearch.Enabled = false;
+                    /*grpFindTitle.Enabled = false;
+                    cboPublisher.Enabled = false;
+                    btnPublishers.Enabled = false;
+                    txtTitle.Focus();*/
                     break;
                 case "View":
+                    /*txtTitle.ReadOnly = true;
+                    txtYear.ReadOnly = true;
+                    txtISBN.ReadOnly = true;
+                    txtISBN.BackColor = Color.White;
+                    txtISBN.ForeColor = Color.Black;
+                    txtDescription.ReadOnly = true;
+                    txtNotes.ReadOnly = true;
+                    txtSubject.ReadOnly = true;
+                    txtComments.ReadOnly = true;*/
                     btnAddCust.Enabled = true;
                     btnFirst.Enabled = true;
                     btnPrevious.Enabled = true;
@@ -335,9 +374,8 @@ namespace KWSalesOrderFormProject
                     btnCancel.Enabled = false;
                     btnEdit.Enabled = true;
                     btnDelete.Enabled = true;
+                    btnDone.Enabled = true;
                     btnPrint.Enabled = true;
-                    btnInventory.Enabled = true;
-                    btnRepairs.Enabled = true;
                     grdRentals.Visible = true;
                     lblCustID.Visible = false;
                     lblItemID.Visible = false;
@@ -355,9 +393,20 @@ namespace KWSalesOrderFormProject
                     txtEmail.Visible = false;
                     txtAddress.Visible = false;
                     txtPhone.Visible = false;
-                    txtSearch.Enabled = true;
                     addCust = false;
                     addTicket = false;
+                    /*grpFindTitle.Enabled = true;
+                    btnPublishers.Enabled = true;
+                    cboPublisher.Enabled = false;
+                    cboAuthor1.Enabled = false;
+                    cboAuthor2.Enabled = false;
+                    cboAuthor3.Enabled = false;
+                    cboAuthor4.Enabled = false;
+                    btnXAuthor1.Enabled = false;
+                    btnXAuthor2.Enabled = false;
+                    btnXAuthor3.Enabled = false;
+                    btnXAuthor4.Enabled = false;
+                    txtTitle.Focus();*/
                     break;
                 case "Add Customer":
                     btnFirst.Enabled = false;
@@ -369,6 +418,7 @@ namespace KWSalesOrderFormProject
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
+                    btnDone.Enabled = false;
                     btnPrint.Enabled = false;
                     btnAddCust.Enabled = false;
                     grdRentals.Visible = false;
@@ -392,10 +442,27 @@ namespace KWSalesOrderFormProject
                     txtEmail.Visible = true;
                     txtAddress.Visible = true;
                     txtPhone.Visible = true;
-                    txtSearch.Enabled = false;  
                     break;
                 //Add or Edit State
                 default:
+                    /*txtTitle.ReadOnly = false;
+                    txtYear.ReadOnly = false;
+                    txtISBN.ReadOnly = false;
+                    if (myState.Equals("Edit"))
+                    {
+                        txtISBN.BackColor = Color.Red;
+                        txtISBN.ForeColor = Color.White;
+                        txtISBN.ReadOnly = true;
+                        txtISBN.TabStop = false;
+                    }
+                    else
+                    {
+                        txtISBN.TabStop = true;
+                    }
+                    txtDescription.ReadOnly = false;
+                    txtNotes.ReadOnly = false;
+                    txtSubject.ReadOnly = false;
+                    txtComments.ReadOnly = false;*/
                     btnFirst.Enabled = false;
                     btnPrevious.Enabled = false;
                     btnNext.Enabled = false;
@@ -405,6 +472,7 @@ namespace KWSalesOrderFormProject
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
+                    btnDone.Enabled = false;
                     btnPrint.Enabled = false;
                     grdRentals.Visible = false;
                     lblCustID.Visible = true;
@@ -419,9 +487,19 @@ namespace KWSalesOrderFormProject
                     txtItemID.Visible = true;
                     txtProductName.Visible = true;
                     txtSKUNumber.Visible = true;
-                    txtSearch.Enabled = false;
+                    /*grpFindTitle.Enabled = false;
+                    cboPublisher.Enabled = true;
+                    cboAuthor1.Enabled = true;
+                    cboAuthor2.Enabled = true;
+                    cboAuthor3.Enabled = true;
+                    cboAuthor4.Enabled = true;
+                    btnXAuthor1.Enabled = true;
+                    btnXAuthor2.Enabled = true;
+                    btnXAuthor3.Enabled = true;
+                    btnXAuthor4.Enabled = true;
+                    txtTitle.Focus();*/
                     break;
             }
         }
-    }
+        }
 }
