@@ -19,7 +19,8 @@ namespace KWSalesOrderFormProject
         bool selectedFile = false,
             addTicket = false,
             addCust = false;
-        string myState;
+        string myState,
+            ticketStatus;
         int myBookmark,
             pageNumber;
         const int itemsPerPage = 45;
@@ -35,11 +36,6 @@ namespace KWSalesOrderFormProject
             InitializeComponent();
         }
 
-        private void btnConnect_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -53,7 +49,7 @@ namespace KWSalesOrderFormProject
                 RentalConnection();
 
                 rentalCommand = new SqlCommand(
-                    "SELECT	RentID, COALESCE(FirstName, ' ') + COALESCE(' ', ' ') + COALESCE(LastName, ' ') AS CustomerName, ItemID, SKUNumber, ProductName, RentDate " +
+                    "SELECT	RentID, Status, COALESCE(FirstName, ' ') + COALESCE(' ', ' ') + COALESCE(LastName, ' ') AS CustomerName, ItemID, SKUNumber, ProductName, RentDate " +
                     "FROM rentedItems " +
                     "JOIN customersTable " +
                     "ON rentedItems.CustomerID = customersTable.CustomerID ", rentalConnection);
@@ -71,6 +67,10 @@ namespace KWSalesOrderFormProject
                     this.BindingContext[rentalTable];
 
                 SetState("View");
+                cboStatus.Items.Add("All");
+                cboStatus.Items.Add("Open");
+                cboStatus.Items.Add("Closed");
+                cboStatus.SelectedItem = "All";
 
             }
             catch (Exception ex)
@@ -231,45 +231,41 @@ namespace KWSalesOrderFormProject
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void picTools_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAddCust_Click(object sender, EventArgs e)
         {
             SetState("Add Customer");
             addCust = true;
         }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_TextChanged_2(object sender, EventArgs e)
         {
             RentalConnection();
-            rentalAdapter = new SqlDataAdapter(
+            if(cboStatus.Text == "All")
+            {
+                rentalAdapter = new SqlDataAdapter(
                 "SELECT	* " +
                 "FROM rentedItems " +
                 "WHERE RentID " +
-                "LIKE '"+ txtSearch.Text +"%'", rentalConnection);
+                "LIKE '" + txtSearch.Text + "%'", rentalConnection);
+            }
+            else if (cboStatus.Text != null)
+            {
+                rentalAdapter = new SqlDataAdapter(
+                "SELECT	* " +
+                "FROM rentedItems " +
+                "WHERE RentID " +
+                "LIKE '" + txtSearch.Text + "%'" +
+                "AND Status " +
+                "LIKE '" + ticketStatus + "%' ", rentalConnection);
+            }
+            else
+            {
+                rentalAdapter = new SqlDataAdapter(
+                "SELECT	* " +
+                "FROM rentedItems " +
+                "WHERE RentID " +
+                "LIKE '" + txtSearch.Text + "%'", rentalConnection);
+            }
+            
             rentalTable = new DataTable();
             rentalAdapter.Fill(rentalTable);
             grdRentals.DataSource = rentalTable;
@@ -294,14 +290,10 @@ namespace KWSalesOrderFormProject
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-
+            ticketStatus = cboStatus.SelectedItem.ToString();
+            textBox1_TextChanged_2(txtSearch, EventArgs.Empty);
         }
         private void SetState(string appState)
         {

@@ -159,31 +159,21 @@ namespace KWSalesOrderFormProject
             switch (appState)
             {
                 case "View":
-                    btnFirst.Enabled = true;
-                    btnPrevious.Enabled = true;
-                    btnNext.Enabled = true;
-                    btnLast.Enabled = true;
                     btnAddNew.Enabled = true;
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
                     btnEdit.Enabled = true;
                     btnDelete.Enabled = true;
-                    btnDone.Enabled = true;
                     btnPrint.Enabled = true;
                     txtSearch.Enabled = true;
                     break;
                 //Add or Edit State
                 default:
-                    btnFirst.Enabled = false;
-                    btnPrevious.Enabled = false;
-                    btnNext.Enabled = false;
-                    btnLast.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
-                    btnDone.Enabled = false;
                     btnPrint.Enabled = false;
                     break;
             }
@@ -263,6 +253,11 @@ namespace KWSalesOrderFormProject
             grdInventory.DataSource = inventoryTable;
 
             inventoryConnection.Close();
+        }
+
+        private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
