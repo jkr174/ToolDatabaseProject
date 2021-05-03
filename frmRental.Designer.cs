@@ -70,6 +70,8 @@ namespace KWSalesOrderFormProject
             this.lblSearch = new System.Windows.Forms.Label();
             this.picTools = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cboStatus = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.rentedItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdRentals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTools)).BeginInit();
@@ -198,19 +200,6 @@ namespace KWSalesOrderFormProject
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // btnNext
-            // 
-            this.btnNext.Enabled = false;
-            this.btnNext.Location = new System.Drawing.Point(272, 437);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 39;
-            this.btnNext.TabStop = false;
-            this.btnNext.Text = "Next >";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Visible = false;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
             // btnPrevious
             // 
             this.btnPrevious.Enabled = false;
@@ -274,7 +263,6 @@ namespace KWSalesOrderFormProject
             this.lblItemID.TabIndex = 52;
             this.lblItemID.Text = "ItemID:";
             this.lblItemID.Visible = false;
-            this.lblItemID.Click += new System.EventHandler(this.label2_Click);
             // 
             // lblSKUNumber
             // 
@@ -303,7 +291,6 @@ namespace KWSalesOrderFormProject
             this.txtCustID.Size = new System.Drawing.Size(413, 20);
             this.txtCustID.TabIndex = 55;
             this.txtCustID.Visible = false;
-            this.txtCustID.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txtItemID
             // 
@@ -328,7 +315,6 @@ namespace KWSalesOrderFormProject
             this.txtProductName.Size = new System.Drawing.Size(413, 20);
             this.txtProductName.TabIndex = 58;
             this.txtProductName.Visible = false;
-            this.txtProductName.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // btnAddCust
             // 
@@ -350,7 +336,6 @@ namespace KWSalesOrderFormProject
             this.txtEmail.TabIndex = 61;
             this.txtEmail.Text = "example@email.com";
             this.txtEmail.Visible = false;
-            this.txtEmail.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // lblEmail
             // 
@@ -361,7 +346,6 @@ namespace KWSalesOrderFormProject
             this.lblEmail.TabIndex = 60;
             this.lblEmail.Text = "Email:";
             this.lblEmail.Visible = false;
-            this.lblEmail.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtAddress
             // 
@@ -421,9 +405,9 @@ namespace KWSalesOrderFormProject
             // txtSearch
             // 
             this.txtSearch.Enabled = false;
-            this.txtSearch.Location = new System.Drawing.Point(137, 83);
+            this.txtSearch.Location = new System.Drawing.Point(157, 83);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(372, 20);
+            this.txtSearch.Size = new System.Drawing.Size(150, 20);
             this.txtSearch.TabIndex = 69;
             this.txtSearch.TextChanged += new System.EventHandler(this.textBox1_TextChanged_2);
             // 
@@ -447,7 +431,6 @@ namespace KWSalesOrderFormProject
             this.picTools.TabIndex = 50;
             this.picTools.TabStop = false;
             this.picTools.Visible = false;
-            this.picTools.Click += new System.EventHandler(this.picTools_Click);
             // 
             // pictureBox1
             // 
@@ -459,12 +442,33 @@ namespace KWSalesOrderFormProject
             this.pictureBox1.TabIndex = 36;
             this.pictureBox1.TabStop = false;
             // 
+            // cboStatus
+            // 
+            this.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStatus.FormattingEnabled = true;
+            this.cboStatus.Location = new System.Drawing.Point(388, 83);
+            this.cboStatus.Name = "cboStatus";
+            this.cboStatus.Size = new System.Drawing.Size(121, 21);
+            this.cboStatus.TabIndex = 70;
+            this.cboStatus.SelectedIndexChanged += new System.EventHandler(this.cboStatus_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(342, 86);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.TabIndex = 71;
+            this.label1.Text = "Status:";
+            // 
             // frmRented
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 559);
             this.ControlBox = false;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cboStatus);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.txtLastName);
@@ -556,6 +560,8 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.ComboBox cboStatus;
+        private System.Windows.Forms.Label label1;
     }
 }
 

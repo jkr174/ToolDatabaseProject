@@ -35,6 +35,11 @@ namespace KWSalesOrderFormProject
             InitializeComponent();
         }
 
+        private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnRepairs_Load(object sender, EventArgs e)
         {
             SetState("Connect");
@@ -59,6 +64,10 @@ namespace KWSalesOrderFormProject
                     this.BindingContext[repairTable];
 
                 SetState("View");
+                cboStatus.Items.Add("All");
+                cboStatus.Items.Add("Open");
+                cboStatus.Items.Add("Closed");
+                cboStatus.SelectedItem = "All";
 
             }
             catch (Exception ex)
@@ -87,30 +96,46 @@ namespace KWSalesOrderFormProject
             switch (appState)
             {
                 case "View":
-                    btnFirst.Enabled = true;
-                    btnPrevious.Enabled = true;
-                    btnNext.Enabled = true;
-                    btnLast.Enabled = true;
                     btnAddNew.Enabled = true;
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
                     btnEdit.Enabled = true;
                     btnDelete.Enabled = true;
                     btnPrint.Enabled = true;
+                    btnInventory.Enabled = true;
+                    grdRentals.Visible = true;
+                    lblItemID.Visible = false;
+                    txtItemID.Visible = false;
                     txtSearch.Enabled = true;
+                    addCust = false;
+                    addTicket = false;
                     break;
-                //Add or Edit State
-                default:
-                    btnFirst.Enabled = false;
-                    btnPrevious.Enabled = false;
-                    btnNext.Enabled = false;
-                    btnLast.Enabled = false;
+                case "Add Customer":
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
+                    grdRentals.Visible = false;
+                    lblItemID.Text = "First Name:";
+                    lblItemID.Visible = true;
+                    txtItemID.Visible = true;
+                    txtSearch.Enabled = false;
+                    break;
+                //Add or Edit State
+                default:
+                    btnAddNew.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnPrint.Enabled = false;
+                    grdRentals.Visible = false;
+                    lblItemID.Visible = true;
+                    lblItemID.Text = "Item ID:";
+                    txtItemID.Visible = true;
+                    txtSearch.Enabled = false;
                     break;
             }
         }
