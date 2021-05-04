@@ -44,7 +44,6 @@ namespace KWSalesOrderFormProject
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnRepairs = new System.Windows.Forms.Button();
             this.btnInventory = new System.Windows.Forms.Button();
@@ -104,10 +103,11 @@ namespace KWSalesOrderFormProject
             // 
             // grdRentals
             // 
+            this.grdRentals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdRentals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdRentals.Location = new System.Drawing.Point(12, 111);
             this.grdRentals.Name = "grdRentals";
-            this.grdRentals.Size = new System.Drawing.Size(497, 239);
+            this.grdRentals.Size = new System.Drawing.Size(641, 239);
             this.grdRentals.TabIndex = 4;
             // 
             // lblTitle
@@ -465,7 +465,7 @@ namespace KWSalesOrderFormProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 559);
+            this.ClientSize = new System.Drawing.Size(665, 559);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboStatus);
@@ -498,7 +498,6 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pictureBox1);
@@ -535,7 +534,6 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Button btnRepairs;
         private System.Windows.Forms.Button btnInventory;

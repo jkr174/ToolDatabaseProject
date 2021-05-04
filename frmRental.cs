@@ -43,6 +43,10 @@ namespace KWSalesOrderFormProject
 
         private void frmKWSales_Load(object sender, EventArgs e)
         {
+            cboStatus.Items.Add("All");
+            cboStatus.Items.Add("Open");
+            cboStatus.Items.Add("Closed");
+            cboStatus.SelectedItem = "All";
             SetState("Connect");
             try
             {
@@ -67,11 +71,8 @@ namespace KWSalesOrderFormProject
                     this.BindingContext[rentalTable];
 
                 SetState("View");
-                cboStatus.Items.Add("All");
-                cboStatus.Items.Add("Open");
-                cboStatus.Items.Add("Closed");
-                cboStatus.SelectedItem = "All";
-
+                
+                rentalConnection.Close();
             }
             catch (Exception ex)
             {
@@ -90,10 +91,30 @@ namespace KWSalesOrderFormProject
 
             if (selectedFile != false)
             {
+                try
+                {
+                    SqlCommandBuilder rentalCommandBuilder = new SqlCommandBuilder(rentalAdapter);
+                    rentalAdapter.Update(rentalTable);
+                    rentalCommand.Dispose();
+                    rentalCommandBuilder.Dispose();
+                    rentalAdapter.Dispose();
+                    rentalTable.Dispose();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(
+                        "Error saving database to file:\r\n" + ex.Message, 
+                        "Save Error", 
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                }
+                rentalAdapter.Update(rentalTable);
                 rentalCommand.Dispose();
                 rentalCommandBuilder.Dispose();
                 rentalAdapter.Dispose();
                 rentalTable.Dispose();
+
             }
         }
 
@@ -117,6 +138,8 @@ namespace KWSalesOrderFormProject
                         txtSKUNumber.Text + " " +
                         txtProductName.Text + " " +
                         now + " ", rentalConnection);
+                    rentalAdapter = new SqlDataAdapter();
+                    rentalAdapter.InsertCommand = rentalCommand;
                     MessageBox.Show("Ticket saved.",
                         "Save",
                         MessageBoxButtons.OK,
@@ -135,6 +158,8 @@ namespace KWSalesOrderFormProject
                         txtEmail.Text + " " +
                         txtAddress.Text + " " +
                         txtPhone.Text + " ", rentalConnection);
+                    rentalAdapter = new SqlDataAdapter();
+                    rentalAdapter.InsertCommand = rentalCommand;
                     MessageBox.Show("Customer saved.",
                         "Save",
                         MessageBoxButtons.OK,
@@ -303,7 +328,6 @@ namespace KWSalesOrderFormProject
                 case "Connect":
                     btnFirst.Enabled = false;
                     btnPrevious.Enabled = false;
-                    btnNext.Enabled = false;
                     btnLast.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = false;
@@ -320,7 +344,6 @@ namespace KWSalesOrderFormProject
                     btnAddCust.Enabled = true;
                     btnFirst.Enabled = true;
                     btnPrevious.Enabled = true;
-                    btnNext.Enabled = true;
                     btnLast.Enabled = true;
                     btnAddNew.Enabled = true;
                     btnSave.Enabled = false;
@@ -354,7 +377,6 @@ namespace KWSalesOrderFormProject
                 case "Add Customer":
                     btnFirst.Enabled = false;
                     btnPrevious.Enabled = false;
-                    btnNext.Enabled = false;
                     btnLast.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;
@@ -390,7 +412,6 @@ namespace KWSalesOrderFormProject
                 default:
                     btnFirst.Enabled = false;
                     btnPrevious.Enabled = false;
-                    btnNext.Enabled = false;
                     btnLast.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;

@@ -40,8 +40,17 @@ namespace KWSalesOrderFormProject
             this.btnPrint = new System.Windows.Forms.Button();
             this.grdInventory = new System.Windows.Forms.DataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cboStatus = new System.Windows.Forms.ComboBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.lblPrice = new System.Windows.Forms.Label();
+            this.txtProductName = new System.Windows.Forms.TextBox();
+            this.txtSKUNumber = new System.Windows.Forms.TextBox();
+            this.txtItemID = new System.Windows.Forms.TextBox();
+            this.txtCat = new System.Windows.Forms.TextBox();
+            this.lblProductName = new System.Windows.Forms.Label();
+            this.lblSKUNumber = new System.Windows.Forms.Label();
+            this.lblItemID = new System.Windows.Forms.Label();
+            this.lblCat = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdInventory)).BeginInit();
             this.SuspendLayout();
@@ -144,10 +153,11 @@ namespace KWSalesOrderFormProject
             // 
             // grdInventory
             // 
+            this.grdInventory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdInventory.Location = new System.Drawing.Point(12, 121);
             this.grdInventory.Name = "grdInventory";
-            this.grdInventory.Size = new System.Drawing.Size(497, 239);
+            this.grdInventory.Size = new System.Drawing.Size(641, 239);
             this.grdInventory.TabIndex = 53;
             // 
             // txtSearch
@@ -159,31 +169,121 @@ namespace KWSalesOrderFormProject
             this.txtSearch.TabIndex = 67;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
-            // label1
+            // lblSearch
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 86);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 13);
-            this.label1.TabIndex = 68;
-            this.label1.Text = "Search by Item Name:";
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(12, 86);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(112, 13);
+            this.lblSearch.TabIndex = 68;
+            this.lblSearch.Text = "Search by Item Name:";
             // 
-            // cboStatus
+            // txtPrice
             // 
-            this.cboStatus.FormattingEnabled = true;
-            this.cboStatus.Location = new System.Drawing.Point(388, 82);
-            this.cboStatus.Name = "cboStatus";
-            this.cboStatus.Size = new System.Drawing.Size(121, 21);
-            this.cboStatus.TabIndex = 69;
-            this.cboStatus.SelectedIndexChanged += new System.EventHandler(this.cboStatus_SelectedIndexChanged);
+            this.txtPrice.Location = new System.Drawing.Point(110, 225);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(399, 20);
+            this.txtPrice.TabIndex = 83;
+            this.txtPrice.Visible = false;
+            // 
+            // lblPrice
+            // 
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Location = new System.Drawing.Point(12, 228);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(34, 13);
+            this.lblPrice.TabIndex = 82;
+            this.lblPrice.Text = "Price:";
+            this.lblPrice.Visible = false;
+            // 
+            // txtProductName
+            // 
+            this.txtProductName.Location = new System.Drawing.Point(110, 199);
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.Size = new System.Drawing.Size(399, 20);
+            this.txtProductName.TabIndex = 77;
+            this.txtProductName.Visible = false;
+            // 
+            // txtSKUNumber
+            // 
+            this.txtSKUNumber.Location = new System.Drawing.Point(110, 173);
+            this.txtSKUNumber.Name = "txtSKUNumber";
+            this.txtSKUNumber.Size = new System.Drawing.Size(399, 20);
+            this.txtSKUNumber.TabIndex = 76;
+            this.txtSKUNumber.Visible = false;
+            // 
+            // txtItemID
+            // 
+            this.txtItemID.Location = new System.Drawing.Point(110, 121);
+            this.txtItemID.Name = "txtItemID";
+            this.txtItemID.Size = new System.Drawing.Size(399, 20);
+            this.txtItemID.TabIndex = 75;
+            this.txtItemID.Visible = false;
+            // 
+            // txtCat
+            // 
+            this.txtCat.Location = new System.Drawing.Point(110, 147);
+            this.txtCat.Name = "txtCat";
+            this.txtCat.Size = new System.Drawing.Size(399, 20);
+            this.txtCat.TabIndex = 74;
+            this.txtCat.Visible = false;
+            // 
+            // lblProductName
+            // 
+            this.lblProductName.AutoSize = true;
+            this.lblProductName.Location = new System.Drawing.Point(12, 202);
+            this.lblProductName.Name = "lblProductName";
+            this.lblProductName.Size = new System.Drawing.Size(78, 13);
+            this.lblProductName.TabIndex = 73;
+            this.lblProductName.Text = "Product Name:";
+            this.lblProductName.Visible = false;
+            // 
+            // lblSKUNumber
+            // 
+            this.lblSKUNumber.AutoSize = true;
+            this.lblSKUNumber.Location = new System.Drawing.Point(12, 176);
+            this.lblSKUNumber.Name = "lblSKUNumber";
+            this.lblSKUNumber.Size = new System.Drawing.Size(72, 13);
+            this.lblSKUNumber.TabIndex = 72;
+            this.lblSKUNumber.Text = "SKU Number:";
+            this.lblSKUNumber.Visible = false;
+            // 
+            // lblItemID
+            // 
+            this.lblItemID.AutoSize = true;
+            this.lblItemID.Location = new System.Drawing.Point(12, 124);
+            this.lblItemID.Name = "lblItemID";
+            this.lblItemID.Size = new System.Drawing.Size(41, 13);
+            this.lblItemID.TabIndex = 71;
+            this.lblItemID.Text = "ItemID:";
+            this.lblItemID.Visible = false;
+            // 
+            // lblCat
+            // 
+            this.lblCat.AutoSize = true;
+            this.lblCat.Location = new System.Drawing.Point(12, 150);
+            this.lblCat.Name = "lblCat";
+            this.lblCat.Size = new System.Drawing.Size(92, 13);
+            this.lblCat.TabIndex = 70;
+            this.lblCat.Text = "Product Category:";
+            this.lblCat.Visible = false;
             // 
             // frmInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 559);
-            this.Controls.Add(this.cboStatus);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(665, 559);
+            this.Controls.Add(this.txtPrice);
+            this.Controls.Add(this.lblPrice);
+            this.Controls.Add(this.txtProductName);
+            this.Controls.Add(this.txtSKUNumber);
+            this.Controls.Add(this.txtItemID);
+            this.Controls.Add(this.txtCat);
+            this.Controls.Add(this.lblProductName);
+            this.Controls.Add(this.lblSKUNumber);
+            this.Controls.Add(this.lblItemID);
+            this.Controls.Add(this.lblCat);
+            this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAddNew);
@@ -218,7 +318,16 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.DataGridView grdInventory;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cboStatus;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.TextBox txtPrice;
+        private System.Windows.Forms.Label lblPrice;
+        private System.Windows.Forms.TextBox txtProductName;
+        private System.Windows.Forms.TextBox txtSKUNumber;
+        private System.Windows.Forms.TextBox txtItemID;
+        private System.Windows.Forms.TextBox txtCat;
+        private System.Windows.Forms.Label lblProductName;
+        private System.Windows.Forms.Label lblSKUNumber;
+        private System.Windows.Forms.Label lblItemID;
+        private System.Windows.Forms.Label lblCat;
     }
 }

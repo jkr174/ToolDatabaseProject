@@ -30,50 +30,6 @@ namespace KWSalesOrderFormProject
         {
             InitializeComponent();
         }
-
-        private void btnConnect_Click(object sender, EventArgs e)
-        {
-            /*try
-            {
-
-                inventoryConnection = new SqlConnection(
-                    "Data Source=(LocalDB)\\MSSQLLocalDB;" +
-                    "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf;" +
-                    "Integrated Security=True;" +
-                    "Connect Timeout=30");
-                inventoryConnection.Open();
-
-                inventoryCommand = new SqlCommand(
-                    "SELECT	*" +
-                    "FROM intentoryTable ", inventoryConnection);
-
-                inventoryAdapter = new SqlDataAdapter();
-                inventoryAdapter.SelectCommand = inventoryCommand;
-
-                inventoryCommandBuilder = new SqlCommandBuilder(inventoryAdapter);
-                inventoryTable = new DataTable();
-                inventoryAdapter.Fill(inventoryTable);
-                grdInventory.ReadOnly = true;
-                grdInventory.DataSource = inventoryTable;
-
-                inventoryManager = (CurrencyManager)
-                    this.BindingContext[inventoryTable];
-
-                //SetState("View");
-
-            }
-            catch (Exception ex)
-            {
-                selectedFile = false;
-                MessageBox.Show(
-                    ex.Message,
-                    "Error establishing database file connection.",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }*/
-        }
-
         private void frmInventory_Load(object sender, EventArgs e)
         {
             try
@@ -81,7 +37,7 @@ namespace KWSalesOrderFormProject
                 InventoryConnection();
 
                 inventoryCommand = new SqlCommand(
-                    "SELECT	*" +
+                    "SELECT	ItemID, ProductCategory, SKUNumber, Name, TotalQty, OnHandQty, OutQty " +
                     "FROM intentoryTable ", inventoryConnection);
 
                 inventoryAdapter = new SqlDataAdapter();
@@ -151,6 +107,7 @@ namespace KWSalesOrderFormProject
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
+            SetState("Add");
 
         }
         private void SetState(string appState)
@@ -159,6 +116,7 @@ namespace KWSalesOrderFormProject
             switch (appState)
             {
                 case "View":
+                    grdInventory.Visible = true;
                     btnAddNew.Enabled = true;
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
@@ -166,15 +124,59 @@ namespace KWSalesOrderFormProject
                     btnDelete.Enabled = true;
                     btnPrint.Enabled = true;
                     txtSearch.Enabled = true;
+                    txtItemID.Visible = false;
+                    txtCat.Visible = false;
+                    txtSKUNumber.Visible = false;
+                    txtProductName.Visible = false;
+                    txtPrice.Visible = false;
+                    lblItemID.Visible = false;
+                    lblCat.Visible = false;
+                    lblSKUNumber.Visible = false;
+                    lblProductName.Visible = false;
+                    lblPrice.Visible = false;
                     break;
-                //Add or Edit State
-                default:
+                case "Edit":
+                    grdInventory.Visible = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
+                    txtItemID.Visible = true;
+                    txtCat.Visible = true;
+                    txtSKUNumber.Visible = true;
+                    txtProductName.Visible = true;
+                    txtPrice.Visible = true;
+                    txtSearch.Visible = true;
+                    lblSearch.Text = "Search by Item ID";
+                    lblItemID.Visible = true;
+                    lblCat.Visible = true;
+                    lblSKUNumber.Visible = true;
+                    lblProductName.Visible = true;
+                    lblPrice.Visible = true;
+                    break;
+                //Add or Edit State
+                default:
+                    grdInventory.Visible = false;
+                    btnAddNew.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnPrint.Enabled = false;
+                    txtItemID.Visible = true;
+                    txtCat.Visible = true;
+                    txtSKUNumber.Visible = true;
+                    txtProductName.Visible = true;
+                    txtPrice.Visible = true;
+                    txtSearch.Enabled = false;
+                    lblSearch.Text = "Search by Item Name";
+                    lblItemID.Visible = true;
+                    lblCat.Visible = true;
+                    lblSKUNumber.Visible = true;
+                    lblProductName.Visible = true;
+                    lblPrice.Visible = true;
                     break;
             }
         }
@@ -189,6 +191,34 @@ namespace KWSalesOrderFormProject
             DateTime now = DateTime.Now;
             try
             {
+                if (myState == "Edit")
+                {
+                    InventoryConnection();
+                    inventoryCommand = new SqlCommand("UPDATE inventoryTable (ItemID, ) " +
+                        "VALUES " +
+                        txtItemID.Text + " ", inventoryConnection);
+                    inventoryAdapter = new SqlDataAdapter();
+                    inventoryAdapter.UpdateCommand = inventoryCommand;
+                    MessageBox.Show("Ticket saved.",
+                        "Save",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    inventoryConnection.Close();
+                }
+                else if (myState == "Add")
+                {
+                    InventoryConnection();
+                    inventoryCommand = new SqlCommand("INSERT INTO inventoryTable (ItemID, ) " +
+                        "VALUES " +
+                        txtItemID.Text + " ", inventoryConnection);
+                    inventoryAdapter = new SqlDataAdapter();
+                    inventoryAdapter.InsertCommand = inventoryCommand;
+                    MessageBox.Show("Ticket saved.",
+                        "Save",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    inventoryConnection.Close();
+                }
             }
             catch (Exception ex)
             {
