@@ -51,6 +51,8 @@ namespace KWSalesOrderFormProject
             this.lblSKUNumber = new System.Windows.Forms.Label();
             this.lblItemID = new System.Windows.Forms.Label();
             this.lblCat = new System.Windows.Forms.Label();
+            this.txtTotalQty = new System.Windows.Forms.TextBox();
+            this.lblTotalQty = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdInventory)).BeginInit();
             this.SuspendLayout();
@@ -62,8 +64,9 @@ namespace KWSalesOrderFormProject
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 62;
             this.btnDelete.TabStop = false;
-            this.btnDelete.Text = "&Delete";
+            this.btnDelete.Text = "&Delete Row";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAddNew
             // 
@@ -268,11 +271,31 @@ namespace KWSalesOrderFormProject
             this.lblCat.Text = "Product Category:";
             this.lblCat.Visible = false;
             // 
+            // txtTotalQty
+            // 
+            this.txtTotalQty.Location = new System.Drawing.Point(110, 251);
+            this.txtTotalQty.Name = "txtTotalQty";
+            this.txtTotalQty.Size = new System.Drawing.Size(399, 20);
+            this.txtTotalQty.TabIndex = 85;
+            this.txtTotalQty.Visible = false;
+            // 
+            // lblTotalQty
+            // 
+            this.lblTotalQty.AutoSize = true;
+            this.lblTotalQty.Location = new System.Drawing.Point(12, 254);
+            this.lblTotalQty.Name = "lblTotalQty";
+            this.lblTotalQty.Size = new System.Drawing.Size(76, 13);
+            this.lblTotalQty.TabIndex = 84;
+            this.lblTotalQty.Text = "Total Quantity:";
+            this.lblTotalQty.Visible = false;
+            // 
             // frmInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 559);
+            this.Controls.Add(this.txtTotalQty);
+            this.Controls.Add(this.lblTotalQty);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.txtProductName);
@@ -329,5 +352,7 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Label lblSKUNumber;
         private System.Windows.Forms.Label lblItemID;
         private System.Windows.Forms.Label lblCat;
+        private System.Windows.Forms.TextBox txtTotalQty;
+        private System.Windows.Forms.Label lblTotalQty;
     }
 }

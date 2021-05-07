@@ -131,13 +131,13 @@ namespace KWSalesOrderFormProject
                 if (addTicket == true)
                 {
                     RentalConnection();
-                    rentalCommand = new SqlCommand("INSERT INTO rentedItems (CustomerID, ItemID, SKUNumber, ProductName, RentDate) " +
-                        "VALUES " +
-                        txtCustID.Text + " " +
-                        txtItemID.Text + " " +
-                        txtSKUNumber.Text + " " +
-                        txtProductName.Text + " " +
-                        now + " ", rentalConnection);
+                    rentalCommand = new SqlCommand( "INSERT INTO rentedItems (CustomerID, ItemID, SKUNumber, ProductName, RentDate) " +
+                                                    "VALUES (" +
+                                                        "'" + txtCustID.Text + "'" +
+                                                        ",'" + txtItemID.Text + "'" +
+                                                        ",'" + txtSKUNumber.Text + "'" +
+                                                        ",'" +txtProductName.Text + "'" +
+                                                        ",'" + now + "');", rentalConnection);
                     rentalAdapter = new SqlDataAdapter();
                     rentalAdapter.InsertCommand = rentalCommand;
                     MessageBox.Show("Ticket saved.",
@@ -148,16 +148,16 @@ namespace KWSalesOrderFormProject
                 }
                 else if (addCust == true)
                 {
-                    rentalCommand = new SqlCommand("INSERT INTO customersTable (CustomerID, FirstName, MiddleName, LastName, Email, Address, Phone) " +
-                        "VALUES " +
-                        txtCustID.Text + " " +
-                        txtItemID.Text + " " +
-                        txtSKUNumber.Text + " " +
-                        txtProductName.Text + " " +
-                        txtLastName.Text + " " +
-                        txtEmail.Text + " " +
-                        txtAddress.Text + " " +
-                        txtPhone.Text + " ", rentalConnection);
+                    rentalCommand = new SqlCommand( "INSERT INTO customersTable (CustomerID, FirstName, MiddleName, LastName, Email, Address, Phone) " +
+                                                    "VALUES (" +
+                                                        "'" + txtCustID.Text + "'" +
+                                                        ",'" + txtItemID.Text + "'" +
+                                                        ",'" + txtSKUNumber.Text + "'" +
+                                                        ",'" + txtProductName.Text + "'" +
+                                                        ",'" + txtLastName.Text + "'" +
+                                                        ",'" + txtEmail.Text + "'" +
+                                                        ",'" + txtAddress.Text + "'" +
+                                                        ",'" + txtPhone.Text + "'); ", rentalConnection);
                     rentalAdapter = new SqlDataAdapter();
                     rentalAdapter.InsertCommand = rentalCommand;
                     MessageBox.Show("Customer saved.",

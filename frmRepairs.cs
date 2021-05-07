@@ -16,14 +16,9 @@ namespace KWSalesOrderFormProject
 {
     public partial class frmRepairs : Form
     {
-        bool selectedFile = false,
-            addTicket = false,
-            addCust = false;
+        bool selectedFile = false;
         string myState,
             ticketStatus;
-        int myBookmark,
-            pageNumber;
-        const int itemsPerPage = 45;
 
         SqlConnection repairConnection;
         SqlCommand repairCommand;
@@ -78,17 +73,18 @@ namespace KWSalesOrderFormProject
             DateTime now = DateTime.Now;
             try
             {
-                if(myState=="Edit")
+                if (myState == "Edit")
                 {
                     cboStatus.Items.Remove("All");
                     cboStatus.SelectedItem = "Open";
                     RentalConnection();
-                    repairCommand = new SqlCommand("UPDATE repairTable (ItemID, Status, EmployeeAssigned, dateAdded) " +
-                        "VALUES " +
-                        txtItemID.Text + " " +
-                        cboStatus.Text + " " +
-                        txtEmployeeAssigned.Text + " " +
-                        "WHERE RepairTicketID = " + txtSearch.Text + " ", repairConnection);
+                    repairCommand = new SqlCommand(
+                        "UPDATE repairTable (ItemID, Status, EmployeeAssigned, dateAdded) " +
+                        "VALUES (" +
+                            "'" + txtItemID.Text + "'" +
+                            ",'" + cboStatus.Text + "'" +
+                            ",'" + txtEmployeeAssigned.Text + "') " +
+                        "WHERE RepairTicketID = '" + txtSearch.Text + "'", repairConnection);
                     repairAdapter = new SqlDataAdapter();
                     repairAdapter.UpdateCommand = repairCommand;
                     MessageBox.Show("Ticket saved.",
@@ -97,17 +93,16 @@ namespace KWSalesOrderFormProject
                         MessageBoxIcon.Information);
                     repairConnection.Close();
                 }
-                else
+                else if(myState == "Add")
                 {
                     RentalConnection();
-                    repairCommand = new SqlCommand("INSERT INTO repairTable (ItemID, Status, EmployeeAssigned, dateAdded) " +
-                        "VALUES " +
-                        txtItemID.Text + " " +
-                         "Open " +
-                        txtEmployeeAssigned.Text + " " +
-                        now + " ", repairConnection);
-                    repairAdapter = new SqlDataAdapter();
-                    repairAdapter.InsertCommand = repairCommand;
+                    repairCommand = new SqlCommand( "INSERT INTO repairTable (ItemID, Status, EmployeeAssigned, dateAdded) " +
+                                                    "VALUES (" +
+                                                        "'" + txtItemID.Text +
+                                                        ",'Open'" +
+                                                        ",'" + txtEmployeeAssigned.Text + "'" +
+                                                        ",'" + now + "')", repairConnection);
+                    repairCommand.ExecuteNonQuery();
                     MessageBox.Show("Ticket saved.",
                         "Save",
                         MessageBoxButtons.OK,
@@ -279,8 +274,6 @@ namespace KWSalesOrderFormProject
                     txtItemID.Visible = false;
                     txtEmployeeAssigned.Visible = false;
                     txtSearch.Enabled = true;
-                    addCust = false;
-                    addTicket = false;
                     break;
                 case "Edit":
                     btnAddNew.Enabled = false;
@@ -296,7 +289,7 @@ namespace KWSalesOrderFormProject
                     lblEmpAssigned.Visible = true;
                     txtItemID.Visible = true;
                     txtEmployeeAssigned.Visible = true;
-                    txtSearch.Enabled = false;
+                    txtSearch.Enabled = true;
                     break;
                 //Add or Edit State
                 default:
