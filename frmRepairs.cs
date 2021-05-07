@@ -172,37 +172,59 @@ namespace KWSalesOrderFormProject
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             RentalConnection();
-            if (cboStatus.Text == "All")
+            if (myState == "View")
             {
-                repairAdapter = new SqlDataAdapter(
-                "SELECT	* " +
-                "FROM repairTable " +
-                "WHERE RepairTicketID " +
-                "LIKE '" + txtSearch.Text + "%'", repairConnection);
+                if (cboStatus.Text == "All")
+                {
+                    repairAdapter = new SqlDataAdapter(
+                    "SELECT	* " +
+                    "FROM repairTable " +
+                    "WHERE RepairTicketID " +
+                    "LIKE '" + txtSearch.Text + "%'", repairConnection);
+                }
+                else if (cboStatus.Text != null)
+                {
+                    repairAdapter = new SqlDataAdapter(
+                    "SELECT	* " +
+                    "FROM repairTable " +
+                    "WHERE RepairTicketID " +
+                    "LIKE '" + txtSearch.Text + "%'" +
+                    "AND Status " +
+                    "LIKE '" + ticketStatus + "%' ", repairConnection);
+                }
+                else
+                {
+                    repairAdapter = new SqlDataAdapter(
+                    "SELECT	* " +
+                    "FROM repairTable " +
+                    "WHERE RepairTicketID " +
+                    "LIKE '" + txtSearch.Text + "%'", repairConnection);
+                }
+                repairTable = new DataTable();
+                repairAdapter.Fill(repairTable);
+                grdRepairs.DataSource = repairTable;
+                repairConnection.Close();
             }
-            else if (cboStatus.Text != null)
+            else if(myState == "Edit")
             {
-                repairAdapter = new SqlDataAdapter(
-                "SELECT	* " +
-                "FROM repairTable " +
-                "WHERE RepairTicketID " +
-                "LIKE '" + txtSearch.Text + "%'" +
-                "AND Status " +
-                "LIKE '" + ticketStatus + "%' ", repairConnection);
-            }
-            else
-            {
-                repairAdapter = new SqlDataAdapter(
-                "SELECT	* " +
-                "FROM repairTable " +
-                "WHERE RepairTicketID " +
-                "LIKE '" + txtSearch.Text + "%'", repairConnection);
+
+                repairCommand = new SqlCommand(
+                    "SELECT * " +
+                    "FROM repairTable " +
+                    "WHERE RepairTicketID " +
+                    "LIKE '" + txtSearch.Text + "%'", repairConnection);
+                repairAdapter = new SqlDataAdapter();
+                repairAdapter.SelectCommand = repairCommand;
+                repairAdapter.Fill(repairTable);
+                //bind txt boxes
+                txtItemID.DataBindings.Add("Text", repairTable, "ItemID");
+                txtEmployeeAssigned.DataBindings.Add("Text", repairTable, "EmployeeAssiged");
+                cboStatus.DataBindings.Add("Text", repairTable, "Status");
+                repairManager = (CurrencyManager)
+                    this.BindingContext[repairTable];
             }
 
-            repairTable = new DataTable();
-            repairAdapter.Fill(repairTable);
-            grdRepairs.DataSource = repairTable;
-            repairConnection.Close();
+            
         }
 
         private void btnRepairs_Load(object sender, EventArgs e)
