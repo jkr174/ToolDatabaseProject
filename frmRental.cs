@@ -216,6 +216,7 @@ namespace KWSalesOrderFormProject
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            CaptureScreen();
             PrintDocument recordDocument;
             recordDocument = new PrintDocument();
             recordDocument.DocumentName = "Titles Record";
@@ -223,25 +224,39 @@ namespace KWSalesOrderFormProject
             printPreview.Document = recordDocument;
             printPreview.ShowDialog();
         }
+        Bitmap memoryImage;
+
+        private void CaptureScreen()
+        {
+            Graphics myGraphics = this.CreateGraphics();
+            Size s = this.Size;
+            memoryImage = new Bitmap(s.Width, s.Height, myGraphics);
+            Graphics memoryGraphics = Graphics.FromImage(memoryImage);
+            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
+        }
         private void PrintRecordPage(object sender, PrintPageEventArgs e)
         {
-            // print graphic
             Pen myPen = new Pen(Color.Black, 3);
-            e.Graphics.DrawRectangle(myPen,
-                e.MarginBounds.Left,
-                e.MarginBounds.Top,
-                e.MarginBounds.Width,
-                100);
-            e.Graphics.DrawImage(picTools.Image,
-                e.MarginBounds.Left + 10,
-                e.MarginBounds.Top + 10, 80, 80);
-            //Heading
-            string s = "RENTAL TICKETS";
-            Font myFont = new Font("Arial", 24, FontStyle.Bold);
-            SizeF sSize = e.Graphics.MeasureString(s, myFont);
-            Bitmap bm = new Bitmap(this.grdRentals.Width, this.grdRentals.Height);
-            grdRentals.DrawToBitmap(bm, new Rectangle(10, 175, this.grdRentals.Width, this.grdRentals.Height));
-            e.Graphics.DrawImage(bm, 0, 0);
+            switch (myState)
+            {
+                case "View":
+                    e.Graphics.DrawImage(picTools.Image,
+                        e.MarginBounds.Left + 10,
+                        e.MarginBounds.Top + 10, 80, 80);
+                    //Heading
+                    string s = "RENTAL TICKETS";
+                    Font myFont = new Font("Arial", 24, FontStyle.Bold);
+                    SizeF sSize = e.Graphics.MeasureString(s, myFont);
+                    Bitmap bm = new Bitmap(this.grdRentals.Width, this.grdRentals.Height);
+                    grdRentals.DrawToBitmap(bm, new Rectangle(10, 175, this.grdRentals.Width, this.grdRentals.Height));
+                    e.Graphics.DrawImage(bm, 0, 0);
+                    break;
+                default:
+                    e.Graphics.DrawImage(memoryImage, 20, 0);
+                    break;
+            }
+                // print graphic
+            
         }
         public void RentalConnection()
         {
@@ -451,7 +466,7 @@ namespace KWSalesOrderFormProject
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
-                    btnPrint.Enabled = false;
+                    btnPrint.Enabled = true;
                     grdRentals.Visible = false;
                     lblCustID.Visible = true;
                     lblItemID.Visible = true;
