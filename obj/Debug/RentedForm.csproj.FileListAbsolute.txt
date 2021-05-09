@@ -35,3 +35,15 @@ C:\Users\romo1\Downloads\ToolDatabaseProject-main (1)\ToolDatabaseProject-main\o
 C:\Users\romo1\Downloads\ToolDatabaseProject-main (1)\ToolDatabaseProject-main\obj\Debug\RentedForm.csproj.CoreCompileInputs.cache
 C:\Users\romo1\Downloads\ToolDatabaseProject-main (1)\ToolDatabaseProject-main\obj\Debug\KWSalesOrderFormProject.exe
 C:\Users\romo1\Downloads\ToolDatabaseProject-main (1)\ToolDatabaseProject-main\obj\Debug\KWSalesOrderFormProject.pdb
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.exe.config
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.exe
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.pdb
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\RentedForm.csprojAssemblyReference.cache
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.frmRepairs.resources
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.frmInventory.resources
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.frmRented.resources
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.Properties.Resources.resources
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\RentedForm.csproj.GenerateResource.cache
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\RentedForm.csproj.CoreCompileInputs.cache
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.exe
+C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.pdb

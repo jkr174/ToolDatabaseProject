@@ -47,10 +47,7 @@ namespace KWSalesOrderFormProject
             this.btnPrint = new System.Windows.Forms.Button();
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.btnFirst = new System.Windows.Forms.Button();
-            this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnLast = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdRepairs)).BeginInit();
             this.SuspendLayout();
@@ -111,7 +108,7 @@ namespace KWSalesOrderFormProject
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(221, 495);
+            this.btnDelete.Location = new System.Drawing.Point(251, 472);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 81;
@@ -122,7 +119,7 @@ namespace KWSalesOrderFormProject
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(93, 408);
+            this.btnAddNew.Location = new System.Drawing.Point(123, 385);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(156, 23);
             this.btnAddNew.TabIndex = 80;
@@ -134,7 +131,7 @@ namespace KWSalesOrderFormProject
             // btnCancel
             // 
             this.btnCancel.Enabled = false;
-            this.btnCancel.Location = new System.Drawing.Point(353, 466);
+            this.btnCancel.Location = new System.Drawing.Point(383, 443);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 79;
@@ -146,7 +143,7 @@ namespace KWSalesOrderFormProject
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(221, 466);
+            this.btnSave.Location = new System.Drawing.Point(251, 443);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 78;
@@ -157,7 +154,7 @@ namespace KWSalesOrderFormProject
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(93, 466);
+            this.btnEdit.Location = new System.Drawing.Point(123, 443);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 77;
@@ -192,12 +189,12 @@ namespace KWSalesOrderFormProject
             this.grdRepairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdRepairs.Location = new System.Drawing.Point(12, 111);
             this.grdRepairs.Name = "grdRepairs";
-            this.grdRepairs.Size = new System.Drawing.Size(508, 239);
+            this.grdRepairs.Size = new System.Drawing.Size(560, 239);
             this.grdRepairs.TabIndex = 72;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(353, 495);
+            this.btnExit.Location = new System.Drawing.Point(383, 472);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 71;
@@ -207,7 +204,7 @@ namespace KWSalesOrderFormProject
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(353, 524);
+            this.btnPrint.Location = new System.Drawing.Point(383, 501);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 70;
@@ -218,72 +215,39 @@ namespace KWSalesOrderFormProject
             // 
             this.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboStatus.FormattingEnabled = true;
-            this.cboStatus.Location = new System.Drawing.Point(388, 83);
+            this.cboStatus.Location = new System.Drawing.Point(447, 83);
             this.cboStatus.Name = "cboStatus";
-            this.cboStatus.Size = new System.Drawing.Size(121, 21);
+            this.cboStatus.Size = new System.Drawing.Size(125, 21);
             this.cboStatus.TabIndex = 106;
             this.cboStatus.SelectedIndexChanged += new System.EventHandler(this.cboStatus_SelectedIndexChanged);
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(342, 86);
+            this.lblStatus.Location = new System.Drawing.Point(401, 86);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(40, 13);
             this.lblStatus.TabIndex = 107;
             this.lblStatus.Text = "Status:";
             // 
-            // btnFirst
+            // btnSearch
             // 
-            this.btnFirst.Location = new System.Drawing.Point(93, 379);
-            this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(75, 23);
-            this.btnFirst.TabIndex = 108;
-            this.btnFirst.Text = "|< First";
-            this.btnFirst.UseVisualStyleBackColor = true;
-            this.btnFirst.Visible = false;
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Location = new System.Drawing.Point(174, 379);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(75, 23);
-            this.btnPrevious.TabIndex = 109;
-            this.btnPrevious.Text = "< Previous";
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Visible = false;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(272, 379);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 110;
-            this.btnNext.Text = "Next >";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Visible = false;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnLast
-            // 
-            this.btnLast.Location = new System.Drawing.Point(353, 379);
-            this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(75, 23);
-            this.btnLast.TabIndex = 111;
-            this.btnLast.Text = "Last >|";
-            this.btnLast.UseVisualStyleBackColor = true;
-            this.btnLast.Visible = false;
+            this.btnSearch.Enabled = false;
+            this.btnSearch.Location = new System.Drawing.Point(302, 81);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 112;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Visible = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // frmRepairs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 559);
-            this.Controls.Add(this.btnLast);
-            this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.btnPrevious);
-            this.Controls.Add(this.btnFirst);
+            this.ClientSize = new System.Drawing.Size(584, 559);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.cboStatus);
             this.Controls.Add(this.txtSearch);
@@ -334,9 +298,6 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.ComboBox cboStatus;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Button btnFirst;
-        private System.Windows.Forms.Button btnPrevious;
-        private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.Button btnLast;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

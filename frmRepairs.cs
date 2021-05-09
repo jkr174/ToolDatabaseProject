@@ -50,6 +50,9 @@ namespace KWSalesOrderFormProject
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            txtItemID.DataBindings.Clear();
+            txtEmployeeAssigned.DataBindings.Clear();
+            cboStatus.DataBindings.Clear();
             SetState("Edit");
             RentalConnection();
             repairCommand = new SqlCommand(
@@ -61,11 +64,13 @@ namespace KWSalesOrderFormProject
             repairAdapter.SelectCommand = repairCommand;
             repairTable = new DataTable();
             repairAdapter.Fill(repairTable);
-            txtSearch.DataBindings.Add("Text", repairTable, "RepairTicketID");
             txtItemID.DataBindings.Add("Text", repairTable, "ItemID");
             txtEmployeeAssigned.DataBindings.Add("Text", repairTable, "EmployeeAssigned");
             repairManager = (CurrencyManager)
                 this.BindingContext[repairTable];
+            repairConnection.Close();
+            repairAdapter.Dispose();
+            repairTable.Dispose();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -75,18 +80,15 @@ namespace KWSalesOrderFormProject
             {
                 if (myState == "Edit")
                 {
-                    cboStatus.Items.Remove("All");
-                    cboStatus.SelectedItem = "Open";
                     RentalConnection();
                     repairCommand = new SqlCommand(
-                        "UPDATE repairTable (ItemID, Status, EmployeeAssigned, dateAdded) " +
-                        "VALUES (" +
-                            "'" + txtItemID.Text + "'" +
-                            ",'" + cboStatus.Text + "'" +
-                            ",'" + txtEmployeeAssigned.Text + "') " +
-                        "WHERE RepairTicketID = '" + txtSearch.Text + "'", repairConnection);
-                    repairAdapter = new SqlDataAdapter();
-                    repairAdapter.UpdateCommand = repairCommand;
+                        "UPDATE repairTable " +
+                        "SET " +
+                            "[ItemID] = '" + txtItemID.Text.ToString() + "'" +
+                            ",[Status] = '" + cboStatus.Text.ToString() + "'" +
+                            ",[EmployeeAssigned] = '" + txtEmployeeAssigned.Text.ToString() + "' " +
+                        "WHERE [RepairTicketID] = '" + txtSearch.Text.ToString() + "'", repairConnection);
+                    repairCommand.ExecuteNonQuery();
                     MessageBox.Show("Ticket saved.",
                         "Save",
                         MessageBoxButtons.OK,
@@ -118,12 +120,13 @@ namespace KWSalesOrderFormProject
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            btnRepairs_Load(sender, e);
             SetState("View");
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
@@ -171,64 +174,47 @@ namespace KWSalesOrderFormProject
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            RentalConnection();
-            if (myState == "View")
-            {
-                if (cboStatus.Text == "All")
+                RentalConnection();
+                if (myState == "View")
                 {
-                    repairAdapter = new SqlDataAdapter(
-                    "SELECT	* " +
-                    "FROM repairTable " +
-                    "WHERE RepairTicketID " +
-                    "LIKE '" + txtSearch.Text + "%'", repairConnection);
+                    if (cboStatus.Text == "All")
+                    {
+                        repairAdapter = new SqlDataAdapter(
+                        "SELECT * " +
+                        "FROM repairTable " +
+                        "WHERE RepairTicketID " +
+                        "LIKE '" + txtSearch.Text + "%'", repairConnection);
+                    }
+                    else if (cboStatus.Text != null)
+                    {
+                        repairAdapter = new SqlDataAdapter(
+                        "SELECT	* " +
+                        "FROM repairTable " +
+                        "WHERE RepairTicketID " +
+                        "LIKE '" + txtSearch.Text + "%'" +
+                        "AND Status " +
+                        "LIKE '" + ticketStatus + "%' ", repairConnection);
+                    }
+                    else
+                    {
+                        repairAdapter = new SqlDataAdapter(
+                        "SELECT	* " +
+                        "FROM repairTable " +
+                        "WHERE RepairTicketID " +
+                        "LIKE '" + txtSearch.Text + "%'", repairConnection);
+                    }
+                    repairTable = new DataTable();
+                    repairAdapter.Fill(repairTable);
+                    grdRepairs.DataSource = repairTable;
+                    repairConnection.Close();
+                    repairAdapter.Dispose();
+                    repairTable.Dispose();
                 }
-                else if (cboStatus.Text != null)
-                {
-                    repairAdapter = new SqlDataAdapter(
-                    "SELECT	* " +
-                    "FROM repairTable " +
-                    "WHERE RepairTicketID " +
-                    "LIKE '" + txtSearch.Text + "%'" +
-                    "AND Status " +
-                    "LIKE '" + ticketStatus + "%' ", repairConnection);
-                }
-                else
-                {
-                    repairAdapter = new SqlDataAdapter(
-                    "SELECT	* " +
-                    "FROM repairTable " +
-                    "WHERE RepairTicketID " +
-                    "LIKE '" + txtSearch.Text + "%'", repairConnection);
-                }
-                repairTable = new DataTable();
-                repairAdapter.Fill(repairTable);
-                grdRepairs.DataSource = repairTable;
-                repairConnection.Close();
-            }
-            else if(myState == "Edit")
-            {
-
-                repairCommand = new SqlCommand(
-                    "SELECT * " +
-                    "FROM repairTable " +
-                    "WHERE RepairTicketID " +
-                    "LIKE '" + txtSearch.Text + "%'", repairConnection);
-                repairAdapter = new SqlDataAdapter();
-                repairAdapter.SelectCommand = repairCommand;
-                repairAdapter.Fill(repairTable);
-                //bind txt boxes
-                txtItemID.DataBindings.Add("Text", repairTable, "ItemID");
-                txtEmployeeAssigned.DataBindings.Add("Text", repairTable, "EmployeeAssiged");
-                cboStatus.DataBindings.Add("Text", repairTable, "Status");
-                repairManager = (CurrencyManager)
-                    this.BindingContext[repairTable];
-            }
-
-            
         }
 
         private void btnRepairs_Load(object sender, EventArgs e)
         {
+            myState = "Connecting";
             cboStatus.Items.Add("All");
             cboStatus.Items.Add("Open");
             cboStatus.Items.Add("Closed");
@@ -251,12 +237,12 @@ namespace KWSalesOrderFormProject
                 repairManager = (CurrencyManager)
                     this.BindingContext[repairTable];
 
-                SetState("View");
-               
-
                 selectedFile = true;
-
+                txtEmployeeAssigned.DataBindings.Clear();
+            txtItemID.DataBindings.Clear();
+            cboStatus.DataBindings.Clear();
                 repairConnection.Close();
+                SetState("View");
             }
             catch (Exception ex)
             {
@@ -269,11 +255,37 @@ namespace KWSalesOrderFormProject
                 return;
             }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            txtItemID.Enabled = true;
+            txtEmployeeAssigned.Enabled = true;
+            cboStatus.Enabled = true;
+            repairCommand = new SqlCommand(
+                        "SELECT * " +
+                        "FROM repairTable " +
+                        "WHERE RepairTicketID " +
+                        "LIKE '" + txtSearch.Text + "%'", repairConnection);
+            repairAdapter = new SqlDataAdapter();
+            repairAdapter.SelectCommand = repairCommand;
+            repairTable = new DataTable();
+            repairAdapter.Fill(repairTable);
+            //bind txt boxes
+            txtEmployeeAssigned.DataBindings.Clear();
+            txtItemID.DataBindings.Clear();
+            cboStatus.DataBindings.Clear();
+            txtItemID.DataBindings.Add("Text", repairTable, "ItemID");
+            txtEmployeeAssigned.DataBindings.Add("Text", repairTable, "EmployeeAssigned");
+            cboStatus.DataBindings.Add("Text", repairTable, "Status");
+            repairManager = (CurrencyManager)
+                this.BindingContext[repairTable];
+        }
+
         public void RentalConnection()
         {
             repairConnection = new SqlConnection(
                     "Data Source = (LocalDB)\\MSSQLLocalDB;" +
-                    "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf; " +
+                    "AttachDbFilename=|DataDirectory|\\ToolRentalsDB.mdf;" +
                     "Integrated Security = True;" +
                     "Connect Timeout=30;");
             repairConnection.Open();
@@ -290,6 +302,7 @@ namespace KWSalesOrderFormProject
                     btnEdit.Enabled = true;
                     btnDelete.Enabled = true;
                     btnPrint.Enabled = true;
+                    btnSearch.Visible = false;
                     grdRepairs.Visible = true;
                     lblItemID.Visible = false;
                     lblEmpAssigned.Visible = false;
@@ -304,17 +317,24 @@ namespace KWSalesOrderFormProject
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
+                    txtEmployeeAssigned.Enabled = false;
+                    txtItemID.Enabled = false;
+                    cboStatus.Enabled = false;
+                    cboStatus.Items.Remove("All");
                     grdRepairs.Visible = false;
-                    lblSearch.Text = "Repair Ticket ID:";
-
+                    btnSearch.Visible = true;
+                    btnSearch.Enabled = true;
                     lblItemID.Visible = true;
                     lblEmpAssigned.Visible = true;
                     txtItemID.Visible = true;
                     txtEmployeeAssigned.Visible = true;
                     txtSearch.Enabled = true;
+                    txtItemID.Text = "";
+                    txtEmployeeAssigned.Text = "";
                     break;
                 //Add or Edit State
                 default:
+                    cboStatus.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;

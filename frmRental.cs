@@ -21,9 +21,6 @@ namespace KWSalesOrderFormProject
             addCust = false;
         string myState,
             ticketStatus;
-        int myBookmark,
-            pageNumber;
-        const int itemsPerPage = 45;
 
         SqlConnection rentalConnection;
         SqlCommand rentalCommand;
@@ -38,7 +35,7 @@ namespace KWSalesOrderFormProject
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void frmKWSales_Load(object sender, EventArgs e)
@@ -120,35 +117,35 @@ namespace KWSalesOrderFormProject
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            
             SetState("Edit");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            RentalConnection();
             DateTime now = DateTime.Now;
             try
             {
                 if (addTicket == true)
                 {
-                    RentalConnection();
-                    rentalCommand = new SqlCommand( "INSERT INTO rentedItems (CustomerID, ItemID, SKUNumber, ProductName, RentDate) " +
+                    rentalCommand = new SqlCommand("INSERT INTO rentedItems (CustomerID, ItemID, SKUNumber, ProductName, RentDate) " +
                                                     "VALUES (" +
                                                         "'" + txtCustID.Text + "'" +
                                                         ",'" + txtItemID.Text + "'" +
                                                         ",'" + txtSKUNumber.Text + "'" +
-                                                        ",'" +txtProductName.Text + "'" +
-                                                        ",'" + now + "');", rentalConnection);
-                    rentalAdapter = new SqlDataAdapter();
-                    rentalAdapter.InsertCommand = rentalCommand;
+                                                        ",'" + txtProductName.Text + "'" +
+                                                        ",'" + now + "')", rentalConnection);
+                    rentalCommand.ExecuteNonQuery();
                     MessageBox.Show("Ticket saved.",
                         "Save",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-                    rentalConnection.Close();
+                    
                 }
                 else if (addCust == true)
                 {
-                    rentalCommand = new SqlCommand( "INSERT INTO customersTable (CustomerID, FirstName, MiddleName, LastName, Email, Address, Phone) " +
+                    rentalCommand = new SqlCommand("INSERT INTO customersTable (CustomerID, FirstName, MiddleName, LastName, Email, Address, Phone) " +
                                                     "VALUES (" +
                                                         "'" + txtCustID.Text + "'" +
                                                         ",'" + txtItemID.Text + "'" +
@@ -157,9 +154,25 @@ namespace KWSalesOrderFormProject
                                                         ",'" + txtLastName.Text + "'" +
                                                         ",'" + txtEmail.Text + "'" +
                                                         ",'" + txtAddress.Text + "'" +
-                                                        ",'" + txtPhone.Text + "'); ", rentalConnection);
-                    rentalAdapter = new SqlDataAdapter();
-                    rentalAdapter.InsertCommand = rentalCommand;
+                                                        ",'" + txtPhone.Text + "')", rentalConnection);
+                    rentalCommand.ExecuteNonQuery();
+                    MessageBox.Show("Customer saved.",
+                        "Save",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else if (myState == "Edit")
+                {
+                    rentalCommand = new SqlCommand(
+                        "UPDATE rentedItems " +
+                        "SET " +
+                            "[CustomerID] = '" + txtCustID.Text.ToString() + "'" +
+                            ",[ItemID] = '" + txtItemID.Text.ToString() + "'" +
+                            ",[SKUNumber] = '" + txtSKUNumber.Text.ToString() + "'" +
+                            ",[ProductName] = '" + txtProductName.Text.ToString() + "'" +
+                            ",[Status] = '" + cboStatus.Text.ToString() + "' " +
+                        "WHERE RentID = '" + txtSearch.Text.ToString() + "'", rentalConnection);
+                    rentalCommand.ExecuteNonQuery();
                     MessageBox.Show("Customer saved.",
                         "Save",
                         MessageBoxButtons.OK,
@@ -173,14 +186,15 @@ namespace KWSalesOrderFormProject
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            rentalConnection.Close();
             SetState("View");
+
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
             try
             {
-                myBookmark = rentalManager.Position;
                 rentalManager.AddNew();
                 SetState("Add");
                 addTicket = true;
@@ -297,6 +311,37 @@ namespace KWSalesOrderFormProject
             rentalConnection.Close();
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            txtCustID.DataBindings.Clear();
+            txtItemID.DataBindings.Clear();
+            txtSKUNumber.DataBindings.Clear();
+            txtProductName.DataBindings.Clear();
+            cboStatus.DataBindings.Clear();
+            SetState("Edit");
+            RentalConnection();
+            rentalCommand = new SqlCommand(
+                        "SELECT * " +
+                        "FROM rentedItems " +
+                        "WHERE RentID " +
+                        "LIKE '" + txtSearch.Text + "%'", rentalConnection);
+
+            rentalAdapter = new SqlDataAdapter();
+            rentalAdapter.SelectCommand = rentalCommand;
+            rentalTable = new DataTable();
+            rentalAdapter.Fill(rentalTable);
+            txtCustID.DataBindings.Add("Text", rentalTable, "CustomerID");
+            txtItemID.DataBindings.Add("Text", rentalTable, "ItemID");
+            txtSKUNumber.DataBindings.Add("Text", rentalTable, "SKUNumber");
+            txtProductName.DataBindings.Add("Text", rentalTable, "ProductName");
+            cboStatus.DataBindings.Add("Text", rentalTable, "Status");
+            rentalManager = (CurrencyManager)
+                this.BindingContext[rentalTable];
+            rentalConnection.Close();
+            rentalAdapter.Dispose();
+            rentalTable.Dispose();
+        }
+
         private void btnRepairs_Click(object sender, EventArgs e)
         {
             try
@@ -326,9 +371,6 @@ namespace KWSalesOrderFormProject
             switch (appState)
             {
                 case "Connect":
-                    btnFirst.Enabled = false;
-                    btnPrevious.Enabled = false;
-                    btnLast.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
@@ -342,9 +384,6 @@ namespace KWSalesOrderFormProject
                     break;
                 case "View":
                     btnAddCust.Enabled = true;
-                    btnFirst.Enabled = true;
-                    btnPrevious.Enabled = true;
-                    btnLast.Enabled = true;
                     btnAddNew.Enabled = true;
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
@@ -375,9 +414,6 @@ namespace KWSalesOrderFormProject
                     addTicket = false;
                     break;
                 case "Add Customer":
-                    btnFirst.Enabled = false;
-                    btnPrevious.Enabled = false;
-                    btnLast.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
@@ -385,6 +421,7 @@ namespace KWSalesOrderFormProject
                     btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
                     btnAddCust.Enabled = false;
+                    btnSearch.Enabled = false;
                     grdRentals.Visible = false;
                     lblCustID.Text = "Customer ID:";
                     lblItemID.Text = "First Name:";
@@ -408,11 +445,30 @@ namespace KWSalesOrderFormProject
                     txtPhone.Visible = true;
                     txtSearch.Enabled = false;  
                     break;
+                case "Edit":
+                    btnAddNew.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnPrint.Enabled = false;
+                    grdRentals.Visible = false;
+                    lblCustID.Visible = true;
+                    lblItemID.Visible = true;
+                    lblProductName.Visible = true;
+                    lblSKUNumber.Visible = true;
+                    lblCustID.Text = "Customer ID:";
+                    lblItemID.Text = "Item ID:";
+                    lblProductName.Text = "Product Name:";
+                    lblSKUNumber.Text = "SKU Number:";
+                    txtCustID.Visible = true;
+                    txtItemID.Visible = true;
+                    txtProductName.Visible = true;
+                    txtSKUNumber.Visible = true;
+                    txtSearch.Enabled = true;
+                    break;
                 //Add or Edit State
                 default:
-                    btnFirst.Enabled = false;
-                    btnPrevious.Enabled = false;
-                    btnLast.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
