@@ -44,7 +44,8 @@ namespace KWSalesOrderFormProject
             Close();
         }
         /// <summary>
-        /// Load Event that automatically attempts to connect to the database. If it fails, then the program displays an error exception message to the user.
+        /// Load Event that automatically attempts to connect to the database. 
+        /// If it fails, then the program displays an error exception message to the user.
         /// </summary>
         /// Input: Loading
         /// Output: Display
@@ -373,7 +374,8 @@ namespace KWSalesOrderFormProject
             rentalConnection.Close();
         }
         /// <summary>
-        /// Allows the user to search situational events during different parts of the form, allowing to search for tickets and information that they need.
+        /// Allows the user to search situational events during different parts of the form, 
+        /// allowing to search for tickets and information that they need.
         /// </summary>
         /// Input: What the user types in the search bar, and when they click on the Search Button.
         /// Output: Displays either the customer or ticket that the user is looking for.
@@ -469,7 +471,8 @@ namespace KWSalesOrderFormProject
             }
         }
         /// <summary>
-        /// Whenever the user wants to search for a ticket that's opened or closed, it calls the text change event so that the datagrid automatically updates.
+        /// Whenever the user wants to search for a ticket that's opened or closed, 
+        /// it calls the text change event so that the datagrid automatically updates.
         /// </summary>
         /// Input:  User clicks on a different item in the combobox
         /// Output: Datagrid is updated automatically 
@@ -479,7 +482,8 @@ namespace KWSalesOrderFormProject
             textBox1_TextChanged_2(txtSearch, EventArgs.Empty);
         }
         /// <summary>
-        /// Method that handles how the application looks during different sections of it, allowing for more usability throughout the application. 
+        /// Method that handles how the application looks during different sections of it, 
+        /// allowing for more usability throughout the application. 
         /// </summary>
         /// Input: Updated as the user uses the application
         /// Output: Application changes how it looks and works.
