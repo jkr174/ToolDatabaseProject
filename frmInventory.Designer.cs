@@ -331,7 +331,9 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.grdInventory);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrint);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmInventory";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmInventory";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmInventory_FormClosing);
             this.Load += new System.EventHandler(this.frmInventory_Load);

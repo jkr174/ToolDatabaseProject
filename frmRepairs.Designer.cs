@@ -266,6 +266,7 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.grdRepairs);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrint);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmRepairs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
