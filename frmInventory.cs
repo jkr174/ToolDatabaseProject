@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Created by: Jovany Romo
+ * Updated: 5-9-2021
+ * 
+ * Summary: Allows for the user to view, add, edit, and delete the inventory table in the database. 
+ */
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,6 +35,11 @@ namespace KWSalesOrderFormProject
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Load Event that automatically attempts to connect to the database. If it fails, then the program displays an error exception message to the user.
+        /// </summary>
+        /// Input: Loading
+        /// Output: Display
         private void frmInventory_Load(object sender, EventArgs e)
         {
             try
@@ -67,7 +78,11 @@ namespace KWSalesOrderFormProject
             }
 
         }
-
+        /// <summary>
+        /// Event for when the application closes and attempts to save changes made to the database.
+        /// </summary>
+        /// Input: Closing
+        /// Output: Application saves and closes.
         private void frmInventory_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (selectedFile != false)
@@ -89,6 +104,11 @@ namespace KWSalesOrderFormProject
             SetState("Add");
 
         }
+        /// <summary>
+        /// Method that handles how the application looks during different sections of it, allowing for more usability throughout the application. 
+        /// </summary>
+        /// Input: Updated as the user uses the application
+        /// Output: Application changes how it looks and works.
         private void SetState(string appState)
         {
             myState = appState;
@@ -157,7 +177,11 @@ namespace KWSalesOrderFormProject
             grdInventory.EditMode = DataGridViewEditMode.EditOnKeystroke;
             SetState("Edit");
         }
-
+        /// <summary>
+        /// How the application handles saving information from the user in different states.
+        /// </summary>
+        /// Input: Click save button event
+        /// Output: Confirmation Message Box and saved information to the database. 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -236,6 +260,9 @@ namespace KWSalesOrderFormProject
             inventoryManager.CancelCurrentEdit();
             SetState("View");
         }
+        /// <summary>
+        /// Connection string that uses localDB to connect to the database file and automatically opens the connection.
+        /// </summary>
         public void InventoryConnection()
         {
             inventoryConnection = new SqlConnection(
@@ -245,7 +272,11 @@ namespace KWSalesOrderFormProject
                     "Connect Timeout=30");
             inventoryConnection.Open();
         }
-
+        /// <summary>
+        /// Dynamically able to search the database
+        /// </summary>
+        ///Input: user text input
+        ///Output: Datagrid is updated as you type
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             InventoryConnection();
@@ -266,12 +297,11 @@ namespace KWSalesOrderFormProject
 
             inventoryConnection.Close();
         }
-
-        private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Allows for the user to delete rows on the table. Displays a warning message to confirm if the user wants to delete the information.
+        /// </summary>
+        /// Input: Delete button click event
+        /// Output: Updates the datagrid and the database with the changed information.
         private void btnDelete_Click(object sender, EventArgs e)
         {
             DialogResult dialog = MessageBox.Show("Are you sure you want to delete this row?", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);

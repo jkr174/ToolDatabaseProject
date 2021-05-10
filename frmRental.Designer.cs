@@ -37,7 +37,6 @@ namespace KWSalesOrderFormProject
             this.rentedItemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.grdRentals = new System.Windows.Forms.DataGridView();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -116,16 +115,6 @@ namespace KWSalesOrderFormProject
             this.lblTitle.TabIndex = 37;
             this.lblTitle.Text = "Rental Tickets";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(221, 495);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 44;
-            this.btnDelete.TabStop = false;
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnAddNew
             // 
@@ -457,7 +446,6 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.picTools);
             this.Controls.Add(this.btnRepairs);
             this.Controls.Add(this.btnInventory);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -490,7 +478,6 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.DataGridView grdRentals;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
