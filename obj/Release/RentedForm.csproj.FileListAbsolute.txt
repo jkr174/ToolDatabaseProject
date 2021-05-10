@@ -1,0 +1,11 @@
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Release\ToolRentalProject.exe.config
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Release\ToolRentalProject.exe
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Release\ToolRentalProject.pdb
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Release\KWSalesOrderFormProject.frmRepairs.resources
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Release\KWSalesOrderFormProject.frmInventory.resources
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Release\KWSalesOrderFormProject.frmRented.resources
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Release\ToolRentalFormProject.Properties.Resources.resources
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Release\RentedForm.csproj.GenerateResource.cache
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Release\RentedForm.csproj.CoreCompileInputs.cache
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Release\ToolRentalProject.exe
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Release\ToolRentalProject.pdb
