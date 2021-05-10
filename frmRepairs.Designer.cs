@@ -35,7 +35,6 @@ namespace KWSalesOrderFormProject
             this.txtItemID = new System.Windows.Forms.TextBox();
             this.lblEmpAssigned = new System.Windows.Forms.Label();
             this.lblItemID = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -105,17 +104,6 @@ namespace KWSalesOrderFormProject
             this.lblItemID.TabIndex = 87;
             this.lblItemID.Text = "Item ID:";
             this.lblItemID.Visible = false;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(251, 472);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 81;
-            this.btnDelete.TabStop = false;
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAddNew
             // 
@@ -256,7 +244,6 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.txtItemID);
             this.Controls.Add(this.lblEmpAssigned);
             this.Controls.Add(this.lblItemID);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -286,7 +273,6 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.TextBox txtItemID;
         private System.Windows.Forms.Label lblEmpAssigned;
         private System.Windows.Forms.Label lblItemID;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

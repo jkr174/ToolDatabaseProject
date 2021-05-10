@@ -2,7 +2,7 @@
  * Created by: Jovany Romo
  * Date Updated: 5/9/2021
  * 
- * Summary: User is able to view, add, edit, and delete to the Rental Table in the database.
+ * Summary: User is able to view, add, and edit to the Rental Table in the database.
  */
 using System;
 using System.IO;
@@ -493,7 +493,6 @@ namespace KWSalesOrderFormProject
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
                     btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
                     btnAddCust.Enabled = false;
                     btnInventory.Enabled = false;
@@ -506,7 +505,6 @@ namespace KWSalesOrderFormProject
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
                     btnEdit.Enabled = true;
-                    btnDelete.Enabled = true;
                     btnPrint.Enabled = true;
                     btnInventory.Enabled = true;
                     btnRepairs.Enabled = true;
@@ -535,7 +533,6 @@ namespace KWSalesOrderFormProject
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
                     btnAddCust.Enabled = false;
                     btnSearch.Enabled = false;
@@ -565,7 +562,6 @@ namespace KWSalesOrderFormProject
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
                     btnAddCust.Enabled = false;
                     btnSearch.Enabled = true;
@@ -598,7 +594,6 @@ namespace KWSalesOrderFormProject
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
                     btnPrint.Enabled = true;
                     grdRentals.Visible = false;
                     lblCustID.Visible = true;
@@ -621,7 +616,6 @@ namespace KWSalesOrderFormProject
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
                     grdRentals.Visible = false;
                     lblCustID.Visible = true;
