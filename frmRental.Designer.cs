@@ -354,7 +354,7 @@ namespace KWSalesOrderFormProject
             // 
             // picTools
             // 
-            this.picTools.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
+            this.picTools.Image = global::ToolRentalFormProject.Properties.Resources.toolsIcon;
             this.picTools.InitialImage = null;
             this.picTools.Location = new System.Drawing.Point(320, 524);
             this.picTools.Name = "picTools";
@@ -366,7 +366,7 @@ namespace KWSalesOrderFormProject
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
+            this.pictureBox1.Image = global::ToolRentalFormProject.Properties.Resources.toolsIcon;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 65);

@@ -165,7 +165,7 @@ namespace KWSalesOrderFormProject
             // 
             // picTools
             // 
-            this.picTools.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
+            this.picTools.Image = global::ToolRentalFormProject.Properties.Resources.toolsIcon;
             this.picTools.Location = new System.Drawing.Point(12, 12);
             this.picTools.Name = "picTools";
             this.picTools.Size = new System.Drawing.Size(100, 65);

@@ -1,5 +1,5 @@
 # ToolDatabaseProject
- Note: LocalDB (Server Version 904) is required for this application to work.
+ Note: Database file needs to be in the same folder as the exe file. LocalDB (Server Version 904) is required for this application to work.
  You can download/upgrade your installtion here: https://go.microsoft.com/fwlink/?linkid=866658
  
  # Rental Form

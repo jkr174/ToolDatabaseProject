@@ -1,13 +1,7 @@
-C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.exe.config
-C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.exe
-C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\KWSalesOrderFormProject.pdb
 C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\RentedForm.csprojAssemblyReference.cache
 C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.frmRented.resources
-C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.Properties.Resources.resources
 C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\RentedForm.csproj.GenerateResource.cache
 C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\RentedForm.csproj.CoreCompileInputs.cache
-C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.exe
-C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.pdb
 C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\KWSalesOrderFormProject.exe.config
 C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\KWSalesOrderFormProject.exe
 C:\Users\romo1\Downloads\ToolDatabaseProject-main\ToolDatabaseProject-main\bin\Debug\KWSalesOrderFormProject.pdb
@@ -47,3 +41,9 @@ C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\D
 C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\RentedForm.csproj.CoreCompileInputs.cache
 C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.exe
 C:\Users\romo1\OneDrive\Documents\GitHub\TitlesBranch3\ToolDatabaseProject\obj\Debug\KWSalesOrderFormProject.pdb
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\ToolRentalFormProject.Properties.Resources.resources
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\ToolRentalProject.exe.config
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\ToolRentalProject.exe
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\bin\Debug\ToolRentalProject.pdb
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\ToolRentalProject.exe
+C:\Users\jromo021627\Documents\GitHub\ToolDatabaseProject\obj\Debug\ToolRentalProject.pdb

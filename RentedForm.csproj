@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{384CABF2-CFB9-44DF-8124-FE8EA9FE5BF8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>KWSalesOrderFormProject</RootNamespace>
-    <AssemblyName>KWSalesOrderFormProject</AssemblyName>
+    <RootNamespace>ToolRentalFormProject</RootNamespace>
+    <AssemblyName>ToolRentalProject</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
