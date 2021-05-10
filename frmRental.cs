@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Created by: Jovany Romo
+ * Date Updated: 5/9/2021
+ * 
+ * Summary: User is able to view, add, edit, and delete to the Rental Table in the database.
+ */
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +43,11 @@ namespace KWSalesOrderFormProject
         {
             Close();
         }
-
+        /// <summary>
+        /// Load Event that automatically attempts to connect to the database. If it fails, then the program displays an error exception message to the user.
+        /// </summary>
+        /// Input: Loading
+        /// Output: Display
         private void frmKWSales_Load(object sender, EventArgs e)
         {
             cboStatus.Items.Add("All");
@@ -82,7 +92,11 @@ namespace KWSalesOrderFormProject
                 return;
             }
         }
-
+        /// <summary>
+        /// Event for when the application closes and attempts to save changes made to the database.
+        /// </summary>
+        /// Input: Closing
+        /// Output: Application saves and closes.
         private void frmKWSales_FormClosing(object sender, FormClosingEventArgs e)
         {
 
@@ -120,7 +134,11 @@ namespace KWSalesOrderFormProject
             
             SetState("Edit");
         }
-
+        /// <summary>
+        /// How the application handles saving information from the user in different states.
+        /// </summary>
+        /// Input: Click save button event
+        /// Output: Confirmation Message Box and saved information to the database. 
         private void btnSave_Click(object sender, EventArgs e)
         {
             RentalConnection();
@@ -151,7 +169,6 @@ namespace KWSalesOrderFormProject
                                                         ",'" + txtItemID.Text + "'" +
                                                         ",'" + txtSKUNumber.Text + "'" +
                                                         ",'" + txtProductName.Text + "'" +
-                                                        ",'" + txtLastName.Text + "'" +
                                                         ",'" + txtEmail.Text + "'" +
                                                         ",'" + txtAddress.Text + "'" +
                                                         ",'" + txtPhone.Text + "')", rentalConnection);
@@ -178,6 +195,30 @@ namespace KWSalesOrderFormProject
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                 }
+                else if (myState=="Edit Customer")
+                {
+                    txtItemID.DataBindings.Add("Text", rentalTable, "FirstName");
+                    txtSKUNumber.DataBindings.Add("Text", rentalTable, "MiddleName");
+                    txtProductName .DataBindings.Add("Text", rentalTable, "LastName");
+                    txtEmail.DataBindings.Add("Text", rentalTable, "Email");
+                    txtAddress.DataBindings.Add("Text", rentalTable, "Address");
+                    txtPhone.DataBindings.Add("Text", rentalTable, "Phone");
+                    rentalCommand = new SqlCommand(
+                        "UPDATE customersTable " +
+                        "SET " +
+                            "[FirstName] = '" + txtItemID.Text.ToString() + "'" +
+                            ",[MiddleName] = '" + txtSKUNumber.Text.ToString() + "'" +
+                            ",[LastName] = '" + txtProductName.Text.ToString() + "'" +
+                            ",[Email] = '" + txtEmail.Text.ToString() + "' " +
+                            ",[Address] = '" + txtAddress.Text.ToString() + "'" +
+                            ",[Phone] = '" + txtPhone.Text.ToString() + "'" +
+                        "WHERE CustomerID = '" + txtSearch.Text.ToString() + "'", rentalConnection);
+                    rentalCommand.ExecuteNonQuery();
+                    MessageBox.Show("Customer saved.",
+                        "Save",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -193,19 +234,9 @@ namespace KWSalesOrderFormProject
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            try
-            {
                 rentalManager.AddNew();
                 SetState("Add");
                 addTicket = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -225,7 +256,9 @@ namespace KWSalesOrderFormProject
             printPreview.ShowDialog();
         }
         Bitmap memoryImage;
-
+        /// <summary>
+        /// Captures the current screen, enabling the user to be able to print out a ticket.
+        /// </summary>
         private void CaptureScreen()
         {
             Graphics myGraphics = this.CreateGraphics();
@@ -234,6 +267,11 @@ namespace KWSalesOrderFormProject
             Graphics memoryGraphics = Graphics.FromImage(memoryImage);
             memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
         }
+        /// <summary>
+        /// Either prints the datagrid for the user, or captures the current screen
+        /// </summary>
+        /// Input: The Print Button click event
+        /// Output: The print preview dialog.
         private void PrintRecordPage(object sender, PrintPageEventArgs e)
         {
             Pen myPen = new Pen(Color.Black, 3);
@@ -243,21 +281,20 @@ namespace KWSalesOrderFormProject
                     e.Graphics.DrawImage(picTools.Image,
                         e.MarginBounds.Left + 10,
                         e.MarginBounds.Top + 10, 80, 80);
-                    //Heading
-                    string s = "RENTAL TICKETS";
-                    Font myFont = new Font("Arial", 24, FontStyle.Bold);
-                    SizeF sSize = e.Graphics.MeasureString(s, myFont);
                     Bitmap bm = new Bitmap(this.grdRentals.Width, this.grdRentals.Height);
                     grdRentals.DrawToBitmap(bm, new Rectangle(10, 175, this.grdRentals.Width, this.grdRentals.Height));
                     e.Graphics.DrawImage(bm, 0, 0);
                     break;
+                    //Single Record
                 default:
                     e.Graphics.DrawImage(memoryImage, 20, 0);
                     break;
             }
-                // print graphic
             
         }
+        /// <summary>
+        /// Connection string that uses localDB to connect to the database file and automatically opens the connection.
+        /// </summary>
         public void RentalConnection()
         {
             rentalConnection = new SqlConnection(
@@ -267,6 +304,11 @@ namespace KWSalesOrderFormProject
                     "Connect Timeout=30;");
             rentalConnection.Open();
         }
+        /// <summary>
+        /// Opens the Inventory Form
+        /// </summary>
+        /// Input: Inventory Button click event
+        /// Output: 
         private void btnInventory_Click(object sender, EventArgs e)
         {
             try
@@ -290,6 +332,11 @@ namespace KWSalesOrderFormProject
             SetState("Add Customer");
             addCust = true;
         }
+        /// <summary>
+        /// Dynamically able to search the database
+        /// </summary>
+        ///Input: user text input
+        ///Output: Datagrid is updated as you type
         private void textBox1_TextChanged_2(object sender, EventArgs e)
         {
             RentalConnection();
@@ -325,38 +372,85 @@ namespace KWSalesOrderFormProject
             grdRentals.DataSource = rentalTable;
             rentalConnection.Close();
         }
-
+        /// <summary>
+        /// Allows the user to search situational events during different parts of the form, allowing to search for tickets and information that they need.
+        /// </summary>
+        /// Input: What the user types in the search bar, and when they click on the Search Button.
+        /// Output: Displays either the customer or ticket that the user is looking for.
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            txtCustID.DataBindings.Clear();
-            txtItemID.DataBindings.Clear();
-            txtSKUNumber.DataBindings.Clear();
-            txtProductName.DataBindings.Clear();
-            cboStatus.DataBindings.Clear();
-            SetState("Edit");
-            RentalConnection();
-            rentalCommand = new SqlCommand(
-                        "SELECT * " +
-                        "FROM rentedItems " +
-                        "WHERE RentID " +
-                        "LIKE '" + txtSearch.Text + "%'", rentalConnection);
+            switch (myState)
+            {
+                case "Edit Customer":
+                    txtCustID.DataBindings.Clear();
+                    txtItemID.DataBindings.Clear();
+                    txtSKUNumber.DataBindings.Clear();
+                    txtProductName.DataBindings.Clear();
+                    cboStatus.DataBindings.Clear();
+                    RentalConnection();
+                    rentalCommand = new SqlCommand(
+                                "SELECT * " +
+                                "FROM customersTable " +
+                                "WHERE CustomerID " +
+                                "LIKE '" + txtSearch.Text + "%'", rentalConnection);
+                    rentalAdapter = new SqlDataAdapter();
+                    rentalAdapter.SelectCommand = rentalCommand;
+                    rentalTable = new DataTable();
+                    rentalAdapter.Fill(rentalTable);
+                    txtCustID.DataBindings.Add("Text", rentalTable, "FirstName");
+                    txtItemID.DataBindings.Add("Text", rentalTable, "MiddleName");
+                    txtSKUNumber.DataBindings.Add("Text", rentalTable, "LastName");
+                    txtProductName.DataBindings.Add("Text", rentalTable, "Email");
+                    txtAddress.DataBindings.Add("Text", rentalTable, "Address");
+                    txtPhone.DataBindings.Add("Text", rentalTable, "Phone");
 
-            rentalAdapter = new SqlDataAdapter();
-            rentalAdapter.SelectCommand = rentalCommand;
-            rentalTable = new DataTable();
-            rentalAdapter.Fill(rentalTable);
-            txtCustID.DataBindings.Add("Text", rentalTable, "CustomerID");
-            txtItemID.DataBindings.Add("Text", rentalTable, "ItemID");
-            txtSKUNumber.DataBindings.Add("Text", rentalTable, "SKUNumber");
-            txtProductName.DataBindings.Add("Text", rentalTable, "ProductName");
-            cboStatus.DataBindings.Add("Text", rentalTable, "Status");
-            rentalManager = (CurrencyManager)
-                this.BindingContext[rentalTable];
-            rentalConnection.Close();
-            rentalAdapter.Dispose();
-            rentalTable.Dispose();
+                    rentalManager = (CurrencyManager)
+                        this.BindingContext[rentalTable];
+                    rentalConnection.Close();
+                    rentalAdapter.Dispose();
+                    rentalTable.Dispose();
+                    break;
+                default:
+                    txtCustID.DataBindings.Clear();
+                    txtItemID.DataBindings.Clear();
+                    txtSKUNumber.DataBindings.Clear();
+                    txtProductName.DataBindings.Clear();
+                    cboStatus.DataBindings.Clear();
+                    SetState("Edit");
+                    RentalConnection();
+                    rentalCommand = new SqlCommand(
+                                "SELECT * " +
+                                "FROM rentedItems " +
+                                "WHERE RentID " +
+                                "LIKE '" + txtSearch.Text + "%'", rentalConnection);
+
+                    rentalAdapter = new SqlDataAdapter();
+                    rentalAdapter.SelectCommand = rentalCommand;
+                    rentalTable = new DataTable();
+                    rentalAdapter.Fill(rentalTable);
+                    txtCustID.DataBindings.Add("Text", rentalTable, "CustomerID");
+                    txtItemID.DataBindings.Add("Text", rentalTable, "ItemID");
+                    txtSKUNumber.DataBindings.Add("Text", rentalTable, "SKUNumber");
+                    txtProductName.DataBindings.Add("Text", rentalTable, "ProductName");
+                    cboStatus.DataBindings.Add("Text", rentalTable, "Status");
+                    rentalManager = (CurrencyManager)
+                        this.BindingContext[rentalTable];
+                    rentalConnection.Close();
+                    rentalAdapter.Dispose();
+                    rentalTable.Dispose();
+                    break;
+            }
         }
 
+        private void btnEditCust_Click(object sender, EventArgs e)
+        {
+            SetState("Edit Customer");
+        }
+        /// <summary>
+        /// Allows the user to access the Repair Section of the form
+        /// </summary>
+        /// Input: Repair button click event
+        /// Output: Repair form loads
         private void btnRepairs_Click(object sender, EventArgs e)
         {
             try
@@ -374,12 +468,21 @@ namespace KWSalesOrderFormProject
                     MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// Whenever the user wants to search for a ticket that's opened or closed, it calls the text change event so that the datagrid automatically updates.
+        /// </summary>
+        /// Input:  User clicks on a different item in the combobox
+        /// Output: Datagrid is updated automatically 
         private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             ticketStatus = cboStatus.SelectedItem.ToString();
             textBox1_TextChanged_2(txtSearch, EventArgs.Empty);
         }
+        /// <summary>
+        /// Method that handles how the application looks during different sections of it, allowing for more usability throughout the application. 
+        /// </summary>
+        /// Input: Updated as the user uses the application
+        /// Output: Application changes how it looks and works.
         private void SetState(string appState)
         {
             myState = appState;
@@ -407,16 +510,15 @@ namespace KWSalesOrderFormProject
                     btnPrint.Enabled = true;
                     btnInventory.Enabled = true;
                     btnRepairs.Enabled = true;
+                    btnEditCust.Enabled = true;
                     grdRentals.Visible = true;
                     lblCustID.Visible = false;
                     lblItemID.Visible = false;
                     lblProductName.Visible = false;
-                    lblLastName.Visible = false;
                     lblSKUNumber.Visible = false;
                     lblEmail.Visible = false;
                     lblAddress.Visible = false;
                     lblPhone.Visible = false;
-                    txtLastName.Visible = false;
                     txtCustID.Visible = false;
                     txtItemID.Visible = false;
                     txtProductName.Visible = false;
@@ -440,13 +542,12 @@ namespace KWSalesOrderFormProject
                     grdRentals.Visible = false;
                     lblCustID.Text = "Customer ID:";
                     lblItemID.Text = "First Name:";
-                    lblProductName.Text = "Middle Name:";
-                    lblSKUNumber.Text = "Last Name:";
+                    lblProductName.Text = "Last Name:";
+                    lblSKUNumber.Text = "Middle Name:";
                     lblCustID.Visible = true;
                     lblItemID.Visible = true;
                     lblProductName.Visible = true;
                     lblSKUNumber.Visible = true;
-                    lblLastName.Visible = true;
                     lblEmail.Visible = true;
                     lblAddress.Visible = true;
                     lblPhone.Visible = true;
@@ -454,11 +555,43 @@ namespace KWSalesOrderFormProject
                     txtItemID.Visible = true;
                     txtProductName.Visible = true;
                     txtSKUNumber.Visible = true;
-                    txtLastName.Visible = true;
                     txtEmail.Visible = true;
                     txtAddress.Visible = true;
                     txtPhone.Visible = true;
                     txtSearch.Enabled = false;  
+                    break;
+                case "Edit Customer":
+                    btnAddNew.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnPrint.Enabled = false;
+                    btnAddCust.Enabled = false;
+                    btnSearch.Enabled = true;
+                    btnEditCust.Enabled = false;
+                    cboStatus.Enabled = false;
+                    grdRentals.Visible = false;
+                    lblSearch.Text = "Search by Customer ID:";
+                    lblCustID.Text = "Customer ID:";
+                    lblItemID.Text = "First Name:";
+                    lblProductName.Text = "Last Name:";
+                    lblSKUNumber.Text = "Middle Name:";
+                    lblCustID.Visible = true;
+                    lblItemID.Visible = true;
+                    lblProductName.Visible = true;
+                    lblSKUNumber.Visible = true;
+                    lblEmail.Visible = true;
+                    lblAddress.Visible = true;
+                    lblPhone.Visible = true;
+                    txtCustID.Visible = false;
+                    txtItemID.Visible = true;
+                    txtProductName.Visible = true;
+                    txtSKUNumber.Visible = true;
+                    txtEmail.Visible = true;
+                    txtAddress.Visible = true;
+                    txtPhone.Visible = true;
+                    txtSearch.Enabled = true;
                     break;
                 case "Edit":
                     btnAddNew.Enabled = false;

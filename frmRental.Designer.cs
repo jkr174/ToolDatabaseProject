@@ -60,8 +60,6 @@ namespace KWSalesOrderFormProject
             this.lblAddress = new System.Windows.Forms.Label();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.lblPhone = new System.Windows.Forms.Label();
-            this.txtLastName = new System.Windows.Forms.TextBox();
-            this.lblLastName = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.picTools = new System.Windows.Forms.PictureBox();
@@ -69,6 +67,7 @@ namespace KWSalesOrderFormProject
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.btnEditCust = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rentedItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdRentals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTools)).BeginInit();
@@ -81,7 +80,7 @@ namespace KWSalesOrderFormProject
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(353, 524);
+            this.btnPrint.Location = new System.Drawing.Point(353, 466);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 2;
@@ -91,7 +90,7 @@ namespace KWSalesOrderFormProject
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(353, 495);
+            this.btnExit.Location = new System.Drawing.Point(353, 524);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 3;
@@ -130,19 +129,19 @@ namespace KWSalesOrderFormProject
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(93, 408);
+            this.btnAddNew.Location = new System.Drawing.Point(93, 495);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(156, 23);
+            this.btnAddNew.Size = new System.Drawing.Size(75, 23);
             this.btnAddNew.TabIndex = 43;
             this.btnAddNew.TabStop = false;
-            this.btnAddNew.Text = "&Add New Ticket";
+            this.btnAddNew.Text = "&Add";
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Enabled = false;
-            this.btnCancel.Location = new System.Drawing.Point(353, 466);
+            this.btnCancel.Location = new System.Drawing.Point(353, 495);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 42;
@@ -281,9 +280,9 @@ namespace KWSalesOrderFormProject
             // btnAddCust
             // 
             this.btnAddCust.Enabled = false;
-            this.btnAddCust.Location = new System.Drawing.Point(272, 408);
+            this.btnAddCust.Location = new System.Drawing.Point(532, 524);
             this.btnAddCust.Name = "btnAddCust";
-            this.btnAddCust.Size = new System.Drawing.Size(156, 23);
+            this.btnAddCust.Size = new System.Drawing.Size(121, 23);
             this.btnAddCust.TabIndex = 59;
             this.btnAddCust.TabStop = false;
             this.btnAddCust.Text = "Add New Customer";
@@ -292,7 +291,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(96, 247);
+            this.txtEmail.Location = new System.Drawing.Point(96, 221);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(413, 20);
             this.txtEmail.TabIndex = 61;
@@ -302,7 +301,7 @@ namespace KWSalesOrderFormProject
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(12, 250);
+            this.lblEmail.Location = new System.Drawing.Point(12, 224);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(35, 13);
             this.lblEmail.TabIndex = 60;
@@ -311,7 +310,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(96, 273);
+            this.txtAddress.Location = new System.Drawing.Point(96, 247);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(413, 20);
             this.txtAddress.TabIndex = 63;
@@ -320,7 +319,7 @@ namespace KWSalesOrderFormProject
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(12, 276);
+            this.lblAddress.Location = new System.Drawing.Point(12, 250);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(48, 13);
             this.lblAddress.TabIndex = 62;
@@ -329,7 +328,7 @@ namespace KWSalesOrderFormProject
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(96, 299);
+            this.txtPhone.Location = new System.Drawing.Point(96, 273);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(413, 20);
             this.txtPhone.TabIndex = 65;
@@ -339,30 +338,12 @@ namespace KWSalesOrderFormProject
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(12, 302);
+            this.lblPhone.Location = new System.Drawing.Point(12, 276);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(41, 13);
             this.lblPhone.TabIndex = 64;
             this.lblPhone.Text = "Phone:";
             this.lblPhone.Visible = false;
-            // 
-            // txtLastName
-            // 
-            this.txtLastName.Location = new System.Drawing.Point(96, 221);
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(413, 20);
-            this.txtLastName.TabIndex = 67;
-            this.txtLastName.Visible = false;
-            // 
-            // lblLastName
-            // 
-            this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(12, 224);
-            this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(61, 13);
-            this.lblLastName.TabIndex = 66;
-            this.lblLastName.Text = "Last Name:";
-            this.lblLastName.Visible = false;
             // 
             // txtSearch
             // 
@@ -434,19 +415,30 @@ namespace KWSalesOrderFormProject
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // btnEditCust
+            // 
+            this.btnEditCust.Enabled = false;
+            this.btnEditCust.Location = new System.Drawing.Point(532, 495);
+            this.btnEditCust.Name = "btnEditCust";
+            this.btnEditCust.Size = new System.Drawing.Size(121, 23);
+            this.btnEditCust.TabIndex = 73;
+            this.btnEditCust.TabStop = false;
+            this.btnEditCust.Text = "Edit Customer";
+            this.btnEditCust.UseVisualStyleBackColor = true;
+            this.btnEditCust.Click += new System.EventHandler(this.btnEditCust_Click);
+            // 
             // frmRented
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 559);
             this.ControlBox = false;
+            this.Controls.Add(this.btnEditCust);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboStatus);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lblSearch);
-            this.Controls.Add(this.txtLastName);
-            this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.lblPhone);
             this.Controls.Add(this.txtAddress);
@@ -522,13 +514,12 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label lblPhone;
-        private System.Windows.Forms.TextBox txtLastName;
-        private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.ComboBox cboStatus;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnEditCust;
     }
 }
 
