@@ -29,13 +29,14 @@ namespace KWSalesOrderFormProject
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInventory));
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picTools = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.grdInventory = new System.Windows.Forms.DataGridView();
@@ -53,7 +54,8 @@ namespace KWSalesOrderFormProject
             this.lblCat = new System.Windows.Forms.Label();
             this.txtTotalQty = new System.Windows.Forms.TextBox();
             this.lblTotalQty = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.printPreview = new System.Windows.Forms.PrintPreviewDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.picTools)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdInventory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,15 +126,15 @@ namespace KWSalesOrderFormProject
             this.lblTitle.Text = "Inventory";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // pictureBox1
+            // picTools
             // 
-            this.pictureBox1.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 65);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 54;
-            this.pictureBox1.TabStop = false;
+            this.picTools.Image = global::KWSalesOrderFormProject.Properties.Resources.toolsIcon;
+            this.picTools.Location = new System.Drawing.Point(12, 12);
+            this.picTools.Name = "picTools";
+            this.picTools.Size = new System.Drawing.Size(100, 65);
+            this.picTools.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTools.TabIndex = 54;
+            this.picTools.TabStop = false;
             // 
             // btnExit
             // 
@@ -153,6 +155,7 @@ namespace KWSalesOrderFormProject
             this.btnPrint.TabIndex = 51;
             this.btnPrint.Text = "&Print";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // grdInventory
             // 
@@ -289,6 +292,16 @@ namespace KWSalesOrderFormProject
             this.lblTotalQty.Text = "Total Quantity:";
             this.lblTotalQty.Visible = false;
             // 
+            // printPreview
+            // 
+            this.printPreview.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreview.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreview.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreview.Enabled = true;
+            this.printPreview.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreview.Icon")));
+            this.printPreview.Name = "printPreview";
+            this.printPreview.Visible = false;
+            // 
             // frmInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,7 +327,7 @@ namespace KWSalesOrderFormProject
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picTools);
             this.Controls.Add(this.grdInventory);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrint);
@@ -322,7 +335,7 @@ namespace KWSalesOrderFormProject
             this.Text = "frmInventory";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmInventory_FormClosing);
             this.Load += new System.EventHandler(this.frmInventory_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTools)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdInventory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -336,7 +349,7 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picTools;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.DataGridView grdInventory;
@@ -354,5 +367,6 @@ namespace KWSalesOrderFormProject
         private System.Windows.Forms.Label lblCat;
         private System.Windows.Forms.TextBox txtTotalQty;
         private System.Windows.Forms.Label lblTotalQty;
+        private System.Windows.Forms.PrintPreviewDialog printPreview;
     }
 }

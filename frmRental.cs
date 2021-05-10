@@ -336,8 +336,8 @@ namespace KWSalesOrderFormProject
         /// <summary>
         /// Dynamically able to search the database
         /// </summary>
-        ///Input: user text input
-        ///Output: Datagrid is updated as you type
+        /// Input: user text input
+        /// Output: Datagrid is updated as you type
         private void textBox1_TextChanged_2(object sender, EventArgs e)
         {
             RentalConnection();

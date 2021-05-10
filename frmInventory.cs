@@ -275,8 +275,8 @@ namespace KWSalesOrderFormProject
         /// <summary>
         /// Dynamically able to search the database
         /// </summary>
-        ///Input: user text input
-        ///Output: Datagrid is updated as you type
+        /// Input: user text input
+        /// Output: Datagrid is updated as you type
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             InventoryConnection();
@@ -318,6 +318,49 @@ namespace KWSalesOrderFormProject
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            CaptureScreen();
+            PrintDocument recordDocument;
+            recordDocument = new PrintDocument();
+            recordDocument.DocumentName = "Titles Record";
+            recordDocument.PrintPage += new PrintPageEventHandler(this.PrintRecordPage);
+            printPreview.Document = recordDocument;
+            printPreview.ShowDialog();
+        }
+        Bitmap memoryImage;
+        /// <summary>
+        /// Captures the current screen, enabling the user to be able to print out a ticket.
+        /// </summary>
+        private void CaptureScreen()
+        {
+            Graphics myGraphics = this.CreateGraphics();
+            Size s = this.Size;
+            memoryImage = new Bitmap(s.Width, s.Height, myGraphics);
+            Graphics memoryGraphics = Graphics.FromImage(memoryImage);
+            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
+        }
+        private void PrintRecordPage(object sender, PrintPageEventArgs e)
+        {
+            Pen myPen = new Pen(Color.Black, 3);
+            switch (myState)
+            {
+                case "View":
+                    e.Graphics.DrawImage(picTools.Image,
+                        e.MarginBounds.Left + 10,
+                        e.MarginBounds.Top + 10, 80, 80);
+                    Bitmap bm = new Bitmap(this.grdInventory.Width, this.grdInventory.Height);
+                    grdInventory.DrawToBitmap(bm, new Rectangle(10, 175, this.grdInventory.Width, this.grdInventory.Height));
+                    e.Graphics.DrawImage(bm, 0, 0);
+                    break;
+                //Single Record
+                default:
+                    e.Graphics.DrawImage(memoryImage, 20, 0);
+                    break;
+            }
+
         }
     }
 }

@@ -39,8 +39,8 @@ namespace KWSalesOrderFormProject
         /// <summary>
         /// Dynamically able to search the database
         /// </summary>
-        ///Input: user text input
-        ///Output: Datagrid is updated as you type
+        /// Input: user text input
+        /// Output: Datagrid is updated as you type
         private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             ticketStatus = cboStatus.SelectedItem.ToString();
@@ -160,8 +160,8 @@ namespace KWSalesOrderFormProject
         /// <summary>
         /// Dynamically able to search the database
         /// </summary>
-        ///Input: user text input
-        ///Output: Datagrid is updated as you type
+        /// Input: user text input
+        /// Output: Datagrid is updated as you type
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
                 RentalConnection();
