@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Created by: Jovany Romo
+ * Date Updated: 5/9/2021
+ * 
+ * Summary: User is able to view, add, and edit to the Rental Table in the database.
+ */
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +36,11 @@ namespace KWSalesOrderFormProject
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Dynamically able to search the database
+        /// </summary>
+        ///Input: user text input
+        ///Output: Datagrid is updated as you type
         private void cboStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             ticketStatus = cboStatus.SelectedItem.ToString();
@@ -47,7 +57,11 @@ namespace KWSalesOrderFormProject
                 repairTable.Dispose();
             }
         }
-
+        /// <summary>
+        /// When the user clicks on the edit button, the form updates, allowing for user input and for the user to search for tickets.
+        /// </summary>
+        /// Input: When the user clicks on the edit button button
+        /// Output: Form updates so the user has fields to type into.
         private void btnEdit_Click(object sender, EventArgs e)
         {
             txtItemID.DataBindings.Clear();
@@ -72,7 +86,11 @@ namespace KWSalesOrderFormProject
             repairAdapter.Dispose();
             repairTable.Dispose();
         }
-
+        /// <summary>
+        /// How the application handles saving information from the user in different states.
+        /// </summary>
+        /// Input: Click save button event
+        /// Output: Confirmation Message Box and saved information to the database. 
         private void btnSave_Click(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
@@ -139,39 +157,11 @@ namespace KWSalesOrderFormProject
             repairManager.CancelCurrentEdit();
             SetState("View");
         }
-
-        private void btnPrevious_Click(object sender, EventArgs e)
-        {
-            if (repairManager.Position == 0)
-            {
-                Console.Beep();
-            }
-            repairManager.Position--;
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            if (repairManager.Position == repairManager.Count - 1)
-            {
-                Console.Beep();
-            }
-            repairManager.Position++;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            DialogResult response;
-            response = MessageBox.Show(
-                "Are you sure you want to delete this record?", 
-                "Delete", 
-                MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (response == DialogResult.No)
-            {
-                return;
-            }
-        }
-
+        /// <summary>
+        /// Dynamically able to search the database
+        /// </summary>
+        ///Input: user text input
+        ///Output: Datagrid is updated as you type
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
                 RentalConnection();
@@ -211,7 +201,11 @@ namespace KWSalesOrderFormProject
                     repairTable.Dispose();
                 }
         }
-
+        /// <summary>
+        /// Load Event that automatically attempts to connect to the database. If it fails, then the program displays an error exception message to the user.
+        /// </summary>
+        /// Input: Loading
+        /// Output: Display
         private void btnRepairs_Load(object sender, EventArgs e)
         {
             myState = "Connecting";
@@ -255,7 +249,11 @@ namespace KWSalesOrderFormProject
                 return;
             }
         }
-
+        /// <summary>
+        /// Allows the user to search situational events during different parts of the form, allowing to search for tickets and information that they need.
+        /// </summary>
+        /// Input: What the user types in the search bar, and when they click on the Search Button.
+        /// Output: Displays either the customer or ticket that the user is looking for.
         private void btnSearch_Click(object sender, EventArgs e)
         {
             txtItemID.Enabled = true;
@@ -280,7 +278,9 @@ namespace KWSalesOrderFormProject
             repairManager = (CurrencyManager)
                 this.BindingContext[repairTable];
         }
-
+        /// <summary>
+        /// Connection string that uses localDB to connect to the database file and automatically opens the connection.
+        /// </summary>
         public void RentalConnection()
         {
             repairConnection = new SqlConnection(
@@ -290,6 +290,11 @@ namespace KWSalesOrderFormProject
                     "Connect Timeout=30;");
             repairConnection.Open();
         }
+        /// <summary>
+        /// Method that handles how the application looks during different sections of it, allowing for more usability throughout the application. 
+        /// </summary>
+        /// Input: Updated as the user uses the application
+        /// Output: Application changes how it looks and works.
         private void SetState(string appState)
         {
             myState = appState;
@@ -300,7 +305,6 @@ namespace KWSalesOrderFormProject
                     btnSave.Enabled = false;
                     btnCancel.Enabled = false;
                     btnEdit.Enabled = true;
-                    btnDelete.Enabled = true;
                     btnPrint.Enabled = true;
                     btnSearch.Visible = false;
                     grdRepairs.Visible = true;
@@ -315,7 +319,6 @@ namespace KWSalesOrderFormProject
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
                     txtEmployeeAssigned.Enabled = false;
                     txtItemID.Enabled = false;
@@ -332,14 +335,13 @@ namespace KWSalesOrderFormProject
                     txtItemID.Text = "";
                     txtEmployeeAssigned.Text = "";
                     break;
-                //Add or Edit State
+                //Add State
                 default:
                     cboStatus.Enabled = false;
                     btnAddNew.Enabled = false;
                     btnSave.Enabled = true;
                     btnCancel.Enabled = true;
                     btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
                     btnPrint.Enabled = false;
                     grdRepairs.Visible = false;
                     lblItemID.Visible = true;

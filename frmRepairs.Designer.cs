@@ -107,12 +107,12 @@ namespace KWSalesOrderFormProject
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(123, 385);
+            this.btnAddNew.Location = new System.Drawing.Point(125, 472);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(156, 23);
+            this.btnAddNew.Size = new System.Drawing.Size(73, 23);
             this.btnAddNew.TabIndex = 80;
             this.btnAddNew.TabStop = false;
-            this.btnAddNew.Text = "&Add New Ticket";
+            this.btnAddNew.Text = "&Add";
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
